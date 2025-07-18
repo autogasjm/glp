@@ -1,0 +1,2427 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<title>Buscador de Modelos GLP</title>
+<link href="https://fonts.googleapis.com/css2?family=Segoe+UI&amp;display=swap" rel="stylesheet"/>
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #e8fce8, #d6f5d6); /* verde muy suave */
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+}
+h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+p.description {
+    font-size: 16px;
+    color: #555;
+    max-width: 600px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 30px;
+    padding: 10px 20px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    margin-bottom: 10px;
+}
+.search-bar input {
+    border: none;
+    flex: 1;
+    padding: 10px;
+    font-size: 18px;
+    outline: none;
+}
+.search-bar img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+select {
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    font-size: 16px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+    width: 250px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.resultado-container {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    max-width: 640px;
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+.grid {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 70vh;
+    width: 100%;
+    padding-right: 10px;
+}
+.grid::-webkit-scrollbar {
+    width: 6px;
+}
+.grid::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+.card {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    padding: 15px;
+    gap: 15px;
+    animation: fadeIn 0.4s ease-in-out;
+    margin-bottom: 15px;
+}
+.card img {
+    width: 100px;
+    height: auto;
+    object-fit: contain;
+}
+.card-content {
+    flex: 1;
+}
+.card-content h3 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    color: #222;
+}
+.card-content p {
+    margin: 2px 0;
+    font-size: 13px;
+    color: #555;
+}
+.whatsapp-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+}
+.whatsapp-button:hover {
+    background-color: #1ebe5d;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body><h1>Conversión de Vehículos a GLP</h1><p class="description">Explora los modelos compatibles para convertir tu vehículo a gas GLP de forma segura, económica y amigable con el medio ambiente. Busca tu modelo y contáctanos fácilmente por WhatsApp.</p>
+<div class="search-bar">
+<img alt="Lupa" src="https://cdn-icons-png.flaticon.com/512/622/622669.png"/>
+<input id="buscador" onkeyup="filtrar()" placeholder="Buscar por marca o modelo..." type="text"/>
+</div>
+<select id="filtroCategoria" onchange="filtrar()">
+<option value="Todos">Todas las categorías</option>
+<option value="Inyección Gaseosa">Inyección Gaseosa</option>
+<option value="Inyeccion Liquida">Inyección Líquida</option>
+<option value="Prins">Prins</option>
+</select>
+<div class="resultado-container" id="zonaResultados"><div class="grid" id="contenedorModelos">
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="DFM" src="img/dfm.png"/>
+<div class="card-content">
+<h3>DFM - S30 1,6 Lts., DOHC Sedan 4P T/M  Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="DFM - S30 1,6 Lts., DOHC Sedan 4P T/M  Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Kia" src="img/kia.png"/>
+<div class="card-content">
+<h3>Kia - Cerato 1,6 Lts., Sedan 4P. T/M Motor Otto Dual. (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Kia - Cerato 1,6 Lts., Sedan 4P. T/M Motor Otto Dual. (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Toyota" src="img/toyota.png"/>
+<div class="card-content">
+<h3>Toyota - Yaris 1,5 Lts., DOHC Sedan 4P. T/M Motor Otto Dual. (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Toyota - Yaris 1,5 Lts., DOHC Sedan 4P. T/M Motor Otto Dual. (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Toyota" src="img/toyota.png"/>
+<div class="card-content">
+<h3>Toyota - Yaris 1,5 Lts., DOHC Sedan 4P. T/A Motor Otto Dual. (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Toyota - Yaris 1,5 Lts., DOHC Sedan 4P. T/A Motor Otto Dual. (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Geely" src="img/geely.png"/>
+<div class="card-content">
+<h3>Geely - EC7 1,8 Lts., DOHC Sedan 4P. T/M  Motor Otto Dual. (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Geely - EC7 1,8 Lts., DOHC Sedan 4P. T/M  Motor Otto Dual. (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Geely" src="img/geely.png"/>
+<div class="card-content">
+<h3>Geely - EC7 1,8 Lts., DOHC Sedan 4P. T/A  Motor Otto Dual. (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Geely - EC7 1,8 Lts., DOHC Sedan 4P. T/A  Motor Otto Dual. (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Hyundai" src="img/hyundai.png"/>
+<div class="card-content">
+<h3>Hyundai - Accent RB 1,4 Lts., Sedán 4P. T/M Motor Otto Dual (GLP.Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Hyundai - Accent RB 1,4 Lts., Sedán 4P. T/M Motor Otto Dual (GLP.Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Hyundai" src="img/hyundai.png"/>
+<div class="card-content">
+<h3>Hyundai - Accent RB 1.4 Hatch Back 5P T/M Motor Otto Dual (GLP.Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Hyundai - Accent RB 1.4 Hatch Back 5P T/M Motor Otto Dual (GLP.Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Hyundai" src="img/hyundai.png"/>
+<div class="card-content">
+<h3>Hyundai - Accent RB 1.4 Hatch Back 5P T/A Motor Otto Dual (GLP.Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros </p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Hyundai - Accent RB 1.4 Hatch Back 5P T/A Motor Otto Dual (GLP.Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="DFM" src="img/dfm.png"/>
+<div class="card-content">
+<h3>DFM - S30 1,6 Lts., DOHC Sedan 4P. T/M Motor Otto Dual (Gasolina - GLP).</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="DFM - S30 1,6 Lts., DOHC Sedan 4P. T/M Motor Otto Dual (Gasolina - GLP)." onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Toyota" src="img/toyota.png"/>
+<div class="card-content">
+<h3>Toyota - Corolla 1,8 Lts., DOHC Sedán 4P. T/M Motor Otto Dual (Gasolina-GLP)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Toyota - Corolla 1,8 Lts., DOHC Sedán 4P. T/M Motor Otto Dual (Gasolina-GLP)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - N300 Max 1,2 Lts., DOHC Furgón 5P. T/M Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.2  litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - N300 Max 1,2 Lts., DOHC Furgón 5P. T/M Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="MAZDA" src="img/mazda.png"/>
+<div class="card-content">
+<h3>MAZDA - 3 1,6 Lts., DOHC Sedán 4P. T/M Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="MAZDA - 3 1,6 Lts., DOHC Sedán 4P. T/M Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Gac Gonow" src="img/gac_gonow.png"/>
+<div class="card-content">
+<h3>Gac Gonow - Way Cargo 1,0Lts. Furgón 5P. T/M Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.0 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Gac Gonow - Way Cargo 1,0Lts. Furgón 5P. T/M Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Gac Gonow" src="img/gac_gonow.png"/>
+<div class="card-content">
+<h3>Gac Gonow - Way 1,0 Lts. Camioneta 2P. T/M Motor Otto Dual ( GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.0 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Gac Gonow - Way 1,0 Lts. Camioneta 2P. T/M Motor Otto Dual ( GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Gac Gonow" src="img/gac_gonow.png"/>
+<div class="card-content">
+<h3>Gac Gonow - Way 1,0 Lts. Camioneta 4P. T/M Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.0 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Gac Gonow - Way 1,0 Lts. Camioneta 4P. T/M Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Gac Gonow" src="img/gac_gonow.png"/>
+<div class="card-content">
+<h3>Gac Gonow - Way Cargo Box 1,0 Lts. Camioneta 2P. T/M Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.0 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Gac Gonow - Way Cargo Box 1,0 Lts. Camioneta 2P. T/M Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Gac Gonow" src="img/gac_gonow.png"/>
+<div class="card-content">
+<h3>Gac Gonow - Way 1,3 Lts. Camioneta 4P. T/M Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.3 litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Gac Gonow - Way 1,3 Lts. Camioneta 4P. T/M Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Gac Gonow" src="img/gac_gonow.png"/>
+<div class="card-content">
+<h3>Gac Gonow - Way 1,3 Lts. Camioneta 2P. T/M  Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.3 litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Gac Gonow - Way 1,3 Lts. Camioneta 2P. T/M  Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Gac Gonow" src="img/gac_gonow.png"/>
+<div class="card-content">
+<h3>Gac Gonow - Way 1,3 Lts. Furgón 5P. T/M Motor Otto Dual ( GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.3 litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Gac Gonow - Way 1,3 Lts. Furgón 5P. T/M Motor Otto Dual ( GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Gac Gonow" src="img/gac_gonow.png"/>
+<div class="card-content">
+<h3>Gac Gonow - Way Cargo Box Frio 1,3 Lts. Camioneta 2P. T/M Motor Otto Dual ( GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.3 litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Gac Gonow - Way Cargo Box Frio 1,3 Lts. Camioneta 2P. T/M Motor Otto Dual ( GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Gac Gonow" src="img/gac_gonow.png"/>
+<div class="card-content">
+<h3>Gac Gonow - Way Cargo Box 1,3 Lts. Camioneta 2P. T/M Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.3 litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Gac Gonow - Way Cargo Box 1,3 Lts. Camioneta 2P. T/M Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Nissan" src="img/nissan.png"/>
+<div class="card-content">
+<h3>Nissan - Sentra 1,8 Lts., Sedan 4P. T/A Motor Otto Dual. (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Nissan - Sentra 1,8 Lts., Sedan 4P. T/A Motor Otto Dual. (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - Sail 1,4 Lts Sedan 4P T/M Motor Otto Dual /GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - Sail 1,4 Lts Sedan 4P T/M Motor Otto Dual /GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Nissan" src="img/nissan.png"/>
+<div class="card-content">
+<h3>Nissan - Sentra 1,8 Lts., Sedan 4P. T/M Motor Otto Dual. (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Nissan - Sentra 1,8 Lts., Sedan 4P. T/M Motor Otto Dual. (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Foton" src="img/foton.png"/>
+<div class="card-content">
+<h3>Foton - Midi Truck 1,3 Lts Pick-up 2P T/M</h3>
+<p><strong>Cilindrada:</strong> 1.3 litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Foton - Midi Truck 1,3 Lts Pick-up 2P T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Foton" src="img/foton.png"/>
+<div class="card-content">
+<h3>Foton - Midi doble cabina 1,3 Lts Pick-up 4PT/M</h3>
+<p><strong>Cilindrada:</strong> 1.3 litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Foton - Midi doble cabina 1,3 Lts Pick-up 4PT/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Fiat" src="img/fiat.png"/>
+<div class="card-content">
+<h3>Fiat - Strada 1,6 Lts Pick-up 2P T/M Motor Otto Dual (GLP - Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Fiat - Strada 1,6 Lts Pick-up 2P T/M Motor Otto Dual (GLP - Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Foton" src="img/foton.png"/>
+<div class="card-content">
+<h3>Foton - K1 Cargo 2,0 Lts Furgon T/M Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 2.0 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Foton - K1 Cargo 2,0 Lts Furgon T/M Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="DFM" src="img/dfm.png"/>
+<div class="card-content">
+<h3>DFM - A30 1,6 Lts Sedan 4P T/M Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="DFM - A30 1,6 Lts Sedan 4P T/M Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Kia" src="img/kia.png"/>
+<div class="card-content">
+<h3>Kia - Rio 4 1,4 Lts Sedan 4P T/M Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Kia - Rio 4 1,4 Lts Sedan 4P T/M Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Kia" src="img/kia.png"/>
+<div class="card-content">
+<h3>Kia - Rio 4 1,4 Lts Sedan 4P T/A Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros </p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Kia - Rio 4 1,4 Lts Sedan 4P T/A Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Kia" src="img/kia.png"/>
+<div class="card-content">
+<h3>Kia - Rio 3 1.4 Lts HatchBack T/A Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros </p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Kia - Rio 3 1.4 Lts HatchBack T/A Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Kia" src="img/kia.png"/>
+<div class="card-content">
+<h3>Kia - Rio 3 1.4 Lts HatchBack  T/M Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Kia - Rio 3 1.4 Lts HatchBack  T/M Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Kia" src="img/kia.png"/>
+<div class="card-content">
+<h3>Kia - Rio 5 1.4 Lts HatchBack 5P T/A Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros </p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Kia - Rio 5 1.4 Lts HatchBack 5P T/A Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Kia" src="img/kia.png"/>
+<div class="card-content">
+<h3>Kia - Rio 5 1.4 Lts HatchBack 5P T/M Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Kia - Rio 5 1.4 Lts HatchBack 5P T/M Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - sail 1,5 Lts Sedan 4P T/M Motor Otto Dual /GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - sail 1,5 Lts Sedan 4P T/M Motor Otto Dual /GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - sail 1,5 Lts Sedan 4P T/A Motor Otto Dual /GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - sail 1,5 Lts Sedan 4P T/A Motor Otto Dual /GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Hyundai" src="img/hyundai.png"/>
+<div class="card-content">
+<h3>Hyundai - Verna 1.4 Lts Sedan 4P T/M Motor Otto Dual /GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Hyundai - Verna 1.4 Lts Sedan 4P T/M Motor Otto Dual /GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - Tracker FWD 1.8 Lts. Station Wagon 5P T/M 4X2 Motor Otto Dual / GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - Tracker FWD 1.8 Lts. Station Wagon 5P T/M 4X2 Motor Otto Dual / GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - Tracker AWD 1.8 Lts. Station Wagon 5P T/M 4X4 Motor Otto Dual / GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - Tracker AWD 1.8 Lts. Station Wagon 5P T/M 4X4 Motor Otto Dual / GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - Tracker AWD 1.8 Lts. DOHC Station Wagon 5P T/A 4X4 Motor Otto Dual / GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - Tracker AWD 1.8 Lts. DOHC Station Wagon 5P T/A 4X4 Motor Otto Dual / GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - Tracker FWD 1.8 Lts. DOHC Station Wagon 5P T/A 4X2 Motor Otto Dual / GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - Tracker FWD 1.8 Lts. DOHC Station Wagon 5P T/A 4X2 Motor Otto Dual / GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - Tracker FWD 1.8 Lts. DOHC Station Wagon 5P T/M 4X2 Motor Otto Dual / GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - Tracker FWD 1.8 Lts. DOHC Station Wagon 5P T/M 4X2 Motor Otto Dual / GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - Tracker AWD 1.8 Lts. DOHC Station Wagon 5P T/M 4X4 Motor Otto Dual / GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - Tracker AWD 1.8 Lts. DOHC Station Wagon 5P T/M 4X4 Motor Otto Dual / GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="JAC" src="img/jac.png"/>
+<div class="card-content">
+<h3>JAC - Grand S3 1.6 Lts Hatch back 5P T/M (Motor Otto Dual / GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="JAC - Grand S3 1.6 Lts Hatch back 5P T/M (Motor Otto Dual / GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="GREAT WALL" src="img/great_wall.png"/>
+<div class="card-content">
+<h3>GREAT WALL - C30 1.5 Lts. Sedan 4P T/M (Motor Otto Dual / GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="GREAT WALL - C30 1.5 Lts. Sedan 4P T/M (Motor Otto Dual / GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - Spin 1.8 Lts  Sedan wagon 7 asientos 5 P T/A (Motor Otto Dual / GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - Spin 1.8 Lts  Sedan wagon 7 asientos 5 P T/A (Motor Otto Dual / GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - Spin 1.8 Lts  Sedan wagon 7 asientos 5 P T/M (Motor Otto Dual / GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - Spin 1.8 Lts  Sedan wagon 7 asientos 5 P T/M (Motor Otto Dual / GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - Spin Activ 1.8 Lts  Station Wagon 7 Asientos 5P T/A (Motor Otto Dual / GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - Spin Activ 1.8 Lts  Station Wagon 7 Asientos 5P T/A (Motor Otto Dual / GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - Spin Activ 1.8 Lts  Station Wagon 7 Asientos 5P T/M (Motor Otto Dual / GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - Spin Activ 1.8 Lts  Station Wagon 7 Asientos 5P T/M (Motor Otto Dual / GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="GREAT WALL" src="img/great_wall.png"/>
+<div class="card-content">
+<h3>GREAT WALL - M4 1.5 Lts. Hatchback 5P T/M (Motor Otto Dual / GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="GREAT WALL - M4 1.5 Lts. Hatchback 5P T/M (Motor Otto Dual / GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chery" src="img/chery.png"/>
+<div class="card-content">
+<h3>Chery - Tiggo 2 1.5 Lts Station Wagon 5P T/M (Motor Otto Dual / GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chery - Tiggo 2 1.5 Lts Station Wagon 5P T/M (Motor Otto Dual / GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="UAZ" src="img/uaz.png"/>
+<div class="card-content">
+<h3>UAZ - Hunter 2.7 Lts Station Wagon Tipo Jeep 5P  T/M 4X4 (Motor Otto Dual / GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 2.7 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="UAZ - Hunter 2.7 Lts Station Wagon Tipo Jeep 5P  T/M 4X4 (Motor Otto Dual / GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Nissan" src="img/nissan.png"/>
+<div class="card-content">
+<h3>Nissan - Tiida 1,6 Lts., DOHC Sedán 4P. T/M Motor Otto Dual.</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> nan</p>
+<p><strong>Kit:</strong> nan</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Nissan - Tiida 1,6 Lts., DOHC Sedán 4P. T/M Motor Otto Dual." onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Nissan" src="img/nissan.png"/>
+<div class="card-content">
+<h3>Nissan - Versa 1,6 Lts., Sedan 4P. T/M Motor Otto Dual. (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Nissan - Versa 1,6 Lts., Sedan 4P. T/M Motor Otto Dual. (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="UAZ" src="img/uaz.png"/>
+<div class="card-content">
+<h3>UAZ - 220695-04 Bukhanka Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 2.7 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="UAZ - 220695-04 Bukhanka Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="UAZ" src="img/uaz.png"/>
+<div class="card-content">
+<h3>UAZ - 374195 Bukhanka Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 2.7 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="UAZ - 374195 Bukhanka Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="UAZ" src="img/uaz.png"/>
+<div class="card-content">
+<h3>UAZ - 390995 Bukhanka Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 2.7 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="UAZ - 390995 Bukhanka Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="UAZ" src="img/uaz.png"/>
+<div class="card-content">
+<h3>UAZ - 390945 Bukhanka Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 2.7 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="UAZ - 390945 Bukhanka Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="UAZ" src="img/uaz.png"/>
+<div class="card-content">
+<h3>UAZ - 330365 Bukhanka Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 2.7 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="UAZ - 330365 Bukhanka Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="JAC" src="img/jac.png"/>
+<div class="card-content">
+<h3>JAC - S2 1.5 Lts  Hatch Back 5P T/M 4x2 Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="JAC - S2 1.5 Lts  Hatch Back 5P T/M 4x2 Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - Cavalier 1.5 Lts  Sedan 4P T/M Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - Cavalier 1.5 Lts  Sedan 4P T/M Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - Cavalier 1.5 Lts  Sedan 4P T/A Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - Cavalier 1.5 Lts  Sedan 4P T/A Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Volkswagen" src="img/volkswagen.png"/>
+<div class="card-content">
+<h3>Volkswagen - Virtus 1.6 Lts. Sedan 4P T/M Motor Otto Dual (GLP - Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Volkswagen - Virtus 1.6 Lts. Sedan 4P T/M Motor Otto Dual (GLP - Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Volkswagen" src="img/volkswagen.png"/>
+<div class="card-content">
+<h3>Volkswagen - Virtus 1.6 Lts. Sedan 4P T/A Motor Otto Dual (GLP - Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Volkswagen - Virtus 1.6 Lts. Sedan 4P T/A Motor Otto Dual (GLP - Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Changan" src="img/changan.png"/>
+<div class="card-content">
+<h3>Changan - CS35 1.6 Lts Station Wagon 5P T/M Motor Otto Dual (GLP - Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Changan - CS35 1.6 Lts Station Wagon 5P T/M Motor Otto Dual (GLP - Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Changan" src="img/changan.png"/>
+<div class="card-content">
+<h3>Changan - CS35 1.6 Lts Station Wagon 5P T/A Motor Otto Dual (GLP - Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Changan - CS35 1.6 Lts Station Wagon 5P T/A Motor Otto Dual (GLP - Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Changan" src="img/changan.png"/>
+<div class="card-content">
+<h3>Changan - CS35 1.6 Lts DOHC Station Wagon 5P T/M Motor Otto Dual (GLP - Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Changan - CS35 1.6 Lts DOHC Station Wagon 5P T/M Motor Otto Dual (GLP - Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Changan" src="img/changan.png"/>
+<div class="card-content">
+<h3>Changan - CS35 1.6 Lts DOHC Station Wagon 5P T/A Motor Otto Dual (GLP - Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Changan - CS35 1.6 Lts DOHC Station Wagon 5P T/A Motor Otto Dual (GLP - Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Changan" src="img/changan.png"/>
+<div class="card-content">
+<h3>Changan - CS35 Plus  1.6 Lts Station Wagon 5P T/M Motor Otto Dual (GLP - Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Changan - CS35 Plus  1.6 Lts Station Wagon 5P T/M Motor Otto Dual (GLP - Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Changan" src="img/changan.png"/>
+<div class="card-content">
+<h3>Changan - CS35 Plus  1.6 Lts Station Wagon 5P T/A Motor Otto Dual (GLP - Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Changan - CS35 Plus  1.6 Lts Station Wagon 5P T/A Motor Otto Dual (GLP - Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Changan" src="img/changan.png"/>
+<div class="card-content">
+<h3>Changan - CS15 1.5 Lts Hatchback T/M Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Changan - CS15 1.5 Lts Hatchback T/M Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Changan" src="img/changan.png"/>
+<div class="card-content">
+<h3>Changan - CS15 1.5 Lts Hatchback T/A Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Changan - CS15 1.5 Lts Hatchback T/A Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Suzuki" src="img/suzuki.png"/>
+<div class="card-content">
+<h3>Suzuki - Grand Nomade 2.4 Lts DOHC Station Wagon 5P T/M 4WD Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 2.4 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Suzuki - Grand Nomade 2.4 Lts DOHC Station Wagon 5P T/M 4WD Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Suzuki" src="img/suzuki.png"/>
+<div class="card-content">
+<h3>Suzuki - Grand Nomade 2.4 Lts DOHC Station Wagon 5P T/A 4WD Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 2.4 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Suzuki - Grand Nomade 2.4 Lts DOHC Station Wagon 5P T/A 4WD Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Suzuki" src="img/suzuki.png"/>
+<div class="card-content">
+<h3>Suzuki - Grand Nomade 2.4 Lts DOHC Station Wagon 5P T/M 2WD Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 2.4 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Suzuki - Grand Nomade 2.4 Lts DOHC Station Wagon 5P T/M 2WD Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Suzuki" src="img/suzuki.png"/>
+<div class="card-content">
+<h3>Suzuki - Grand Nomade 2.4 Lts DOHC Station Wagon 5P T/A 2WD Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 2.4 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Suzuki - Grand Nomade 2.4 Lts DOHC Station Wagon 5P T/A 2WD Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chery" src="img/chery.png"/>
+<div class="card-content">
+<h3>Chery - Arrizo 7 1.5 Lts DOHC Sedan 4P T/M Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chery - Arrizo 7 1.5 Lts DOHC Sedan 4P T/M Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Subaru" src="img/subaru.png"/>
+<div class="card-content">
+<h3>Subaru - XV 1.6 Lts CVT Station Wagon 5P T/A 4X4 Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Subaru - XV 1.6 Lts CVT Station Wagon 5P T/A 4X4 Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Subaru" src="img/subaru.png"/>
+<div class="card-content">
+<h3>Subaru - XV 1.6 Lts DOHC Station Wagon 5P T/M 4X4 Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Subaru - XV 1.6 Lts DOHC Station Wagon 5P T/M 4X4 Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Suzuki" src="img/suzuki.png"/>
+<div class="card-content">
+<h3>Suzuki - Swift 1.2 Lts DOHC Hatchback 5P T/M 4X2 Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.2 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Suzuki - Swift 1.2 Lts DOHC Hatchback 5P T/M 4X2 Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Suzuki" src="img/suzuki.png"/>
+<div class="card-content">
+<h3>Suzuki - Swift 1.2 Lts Hatchback 5P T/A 4X2 Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.2 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Suzuki - Swift 1.2 Lts Hatchback 5P T/A 4X2 Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Suzuki" src="img/suzuki.png"/>
+<div class="card-content">
+<h3>Suzuki - Swift Dzire 1.2 Lts  DOHC  Sedan 4P T/M 4X2 Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.2 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Suzuki - Swift Dzire 1.2 Lts  DOHC  Sedan 4P T/M 4X2 Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Suzuki" src="img/suzuki.png"/>
+<div class="card-content">
+<h3>Suzuki - Swift Dzire 1.2 Lts Sedan 4P T/A 4X2 Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.2 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Suzuki - Swift Dzire 1.2 Lts Sedan 4P T/A 4X2 Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chery" src="img/chery.png"/>
+<div class="card-content">
+<h3>Chery - Arrizo 5 1.5 Lts. Sedan 4P T/M 4x2  Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chery - Arrizo 5 1.5 Lts. Sedan 4P T/M 4x2  Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Chery" src="img/chery.png"/>
+<div class="card-content">
+<h3>Chery - Arrizo 5 1.5 Lts. Sedan 4P T/A 4x2  Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Chery - Arrizo 5 1.5 Lts. Sedan 4P T/A 4x2  Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Volkswagen" src="img/volkswagen.png"/>
+<div class="card-content">
+<h3>Volkswagen - T-Cross 1.6 Lts  Station Wagon 5P T/M 4X2 Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Volkswagen - T-Cross 1.6 Lts  Station Wagon 5P T/M 4X2 Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Volkswagen" src="img/volkswagen.png"/>
+<div class="card-content">
+<h3>Volkswagen - T-Cross 1.6 Lts  Station Wagon 5P T/A 4X2 Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Volkswagen - T-Cross 1.6 Lts  Station Wagon 5P T/A 4X2 Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Ram" src="img/ram.png"/>
+<div class="card-content">
+<h3>Ram - 700 laramie CD 1.3 Camioneta 4P T/M Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.3 litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo E3-110R-006070</p>
+<button class="whatsapp-button" data-modelo="Ram - 700 laramie CD 1.3 Camioneta 4P T/M Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="DFSK" src="img/dfsk.png"/>
+<div class="card-content">
+<h3>DFSK - Cargo Van C35 1.5 Lts Furgon 5P T/M T/M Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="DFSK - Cargo Van C35 1.5 Lts Furgon 5P T/M T/M Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="DFSK" src="img/dfsk.png"/>
+<div class="card-content">
+<h3>DFSK - Truck SC Serie C 1.5 Lts Camioneta 2P T/M  Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="DFSK - Truck SC Serie C 1.5 Lts Camioneta 2P T/M  Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="DFSK" src="img/dfsk.png"/>
+<div class="card-content">
+<h3>DFSK - Truck DC Serie C 1.5 Lts Camioneta 4P T/M  Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="DFSK - Truck DC Serie C 1.5 Lts Camioneta 4P T/M  Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="DFSK" src="img/dfsk.png"/>
+<div class="card-content">
+<h3>DFSK - Cargo Box Serie C 1.5 Lts Camioneta 2P T/M  Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="DFSK - Cargo Box Serie C 1.5 Lts Camioneta 2P T/M  Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="DFSK" src="img/dfsk.png"/>
+<div class="card-content">
+<h3>DFSK - Cargo Box Serie C 1.5 Lts Camioneta 4P T/M  Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="DFSK - Cargo Box Serie C 1.5 Lts Camioneta 4P T/M  Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="DFSK" src="img/dfsk.png"/>
+<div class="card-content">
+<h3>DFSK - Refritruck Serie C 1.5 Lts Camioneta 2P T/M Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="DFSK - Refritruck Serie C 1.5 Lts Camioneta 2P T/M Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="KYC" src="img/kyc.png"/>
+<div class="card-content">
+<h3>KYC - X5 1.5 Cargo Box 1.5 Lts Furgon 2P T/M Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="KYC - X5 1.5 Cargo Box 1.5 Lts Furgon 2P T/M Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="KYC" src="img/kyc.png"/>
+<div class="card-content">
+<h3>KYC - X5 1.5 Pick-Up 1.5 Lts Camioneta 2P T/M Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="KYC - X5 1.5 Pick-Up 1.5 Lts Camioneta 2P T/M Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="KYC" src="img/kyc.png"/>
+<div class="card-content">
+<h3>KYC - T3 Cargo Box 1.5 Lts Camioneta 2P T/M Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="KYC - T3 Cargo Box 1.5 Lts Camioneta 2P T/M Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="KYC" src="img/kyc.png"/>
+<div class="card-content">
+<h3>KYC - T3 Pick-Up 1.5 Lts Camioneta 2P T/M Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="KYC - T3 Pick-Up 1.5 Lts Camioneta 2P T/M Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Volkswagen" src="img/volkswagen.png"/>
+<div class="card-content">
+<h3>Volkswagen - Voyage 1,6 Lts., SOHC Sedan 4P T/M Motor Otto Dual (Otto-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo IG-1</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 616448000</p>
+<button class="whatsapp-button" data-modelo="Volkswagen - Voyage 1,6 Lts., SOHC Sedan 4P T/M Motor Otto Dual (Otto-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="KYC" src="img/kyc.png"/>
+<div class="card-content">
+<h3>KYC - T3 D/C Pick-Up 1.5 Lts Camioneta 2P T/M Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="KYC - T3 D/C Pick-Up 1.5 Lts Camioneta 2P T/M Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="UAZ" src="img/uaz.png"/>
+<div class="card-content">
+<h3>UAZ - Kasak (Patriot) 2.7 Lts. T/A Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 2.7 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo E3-110R-006070</p>
+<button class="whatsapp-button" data-modelo="UAZ - Kasak (Patriot) 2.7 Lts. T/A Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="UAZ" src="img/uaz.png"/>
+<div class="card-content">
+<h3>UAZ - Kasak MT 2.7 Lts. T/M Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 2.7 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo E3-110R-006070</p>
+<button class="whatsapp-button" data-modelo="UAZ - Kasak MT 2.7 Lts. T/M Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="FIAT" src="img/fiat.png"/>
+<div class="card-content">
+<h3>FIAT - Qubo Dynamic 1.4 (300 5PB) Hatchback 4P T/M Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="FIAT - Qubo Dynamic 1.4 (300 5PB) Hatchback 4P T/M Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="FIAT" src="img/fiat.png"/>
+<div class="card-content">
+<h3>FIAT - Qubo Active 1.4 (300 4PB) Hatchback 4P T/M Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="FIAT - Qubo Active 1.4 (300 4PB) Hatchback 4P T/M Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Renault" src="img/renault.png"/>
+<div class="card-content">
+<h3>Renault - Oroch 1.6 Pick Up 4P T/M Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Renault - Oroch 1.6 Pick Up 4P T/M Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Toyota" src="img/toyota.png"/>
+<div class="card-content">
+<h3>Toyota - Corolla 1,8 Lts., DOHC Sedán 4P. T/M Motor Otto Dual (Gasolina-GLP)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo IG-1</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 616448000</p>
+<button class="whatsapp-button" data-modelo="Toyota - Corolla 1,8 Lts., DOHC Sedán 4P. T/M Motor Otto Dual (Gasolina-GLP)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Renault" src="img/renault.png"/>
+<div class="card-content">
+<h3>Renault - Symbol 1,6 Lts., SOHC Sedan 4P. T/M Motor Otto Dual (Gasolina - GLP)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo IG-1</p>
+<p><strong>Válvula:</strong> Landirenzo 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 616448000</p>
+<button class="whatsapp-button" data-modelo="Renault - Symbol 1,6 Lts., SOHC Sedan 4P. T/M Motor Otto Dual (Gasolina - GLP)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="MG" src="img/mg.png"/>
+<div class="card-content">
+<h3>MG - ZX 1.5 Lts MT Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Tomasetto 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="MG - ZX 1.5 Lts MT Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="MG" src="img/mg.png"/>
+<div class="card-content">
+<h3>MG - ZX 1.5 Lts CVT Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Tomasetto 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="MG - ZX 1.5 Lts CVT Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Honda" src="img/honda.png"/>
+<div class="card-content">
+<h3>Honda - HR -V LXS 1.8 Lts Station Wagon 5P T/A Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Tomasetto 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Honda - HR -V LXS 1.8 Lts Station Wagon 5P T/A Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Honda" src="img/honda.png"/>
+<div class="card-content">
+<h3>Honda - HR -V EXS 1.8 Lts Station Wagon 5P T/A Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Tomasetto 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Honda - HR -V EXS 1.8 Lts Station Wagon 5P T/A Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Changan" src="img/changan.png"/>
+<div class="card-content">
+<h3>Changan - Alsvin 1,4 Lts 4P T/M Motor Otto Dual (GLP- Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros </p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Tomasetto 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Changan - Alsvin 1,4 Lts 4P T/M Motor Otto Dual (GLP- Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyección Gaseosa">
+<img alt="Ssangyong" src="img/ssangyong.png"/>
+<div class="card-content">
+<h3>Ssangyong - Tivoli LX 1,6 Lts., 6MT 2WD 5P T/M Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> mecánica</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> LANDIRENZO</p>
+<p><strong>Regulador:</strong> Landirenzo 67R-010056</p>
+<p><strong>Válvula:</strong> Tomasetto 67R-013018</p>
+<p><strong>ECU:</strong> Landirenzo 67R016043</p>
+<button class="whatsapp-button" data-modelo="Ssangyong - Tivoli LX 1,6 Lts., 6MT 2WD 5P T/M Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="MARCA" src="img/marca.png"/>
+<div class="card-content">
+<h3>MARCA - MODELO</h3>
+<p><strong>Cilindrada:</strong> Cilindrada</p>
+<p><strong>Transmisión:</strong> T/M</p>
+<p><strong>Empresa:</strong> EMPRESA SOLICITANTE</p>
+<p><strong>Kit:</strong> MARCA EQUIPO (KIT)</p>
+<p><strong>Regulador:</strong> REGULADOR DE PRESION</p>
+<p><strong>Válvula:</strong> VALVULA ALIVIO</p>
+<p><strong>ECU:</strong> UNIDAD ELECTRONICA</p>
+<button class="whatsapp-button" data-modelo="MARCA - MODELO" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Hyundai" src="img/hyundai.png"/>
+<div class="card-content">
+<h3>Hyundai - Accent 1,6Lts Sedan 4P T/M</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Hyundai - Accent 1,6Lts Sedan 4P T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Hyundai" src="img/hyundai.png"/>
+<div class="card-content">
+<h3>Hyundai - Accent 1,6Lts Sedan 4P T/A</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Hyundai - Accent 1,6Lts Sedan 4P T/A" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Hyundai" src="img/hyundai.png"/>
+<div class="card-content">
+<h3>Hyundai - Accent RB 1.6 Hatch Back 5P T/M</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Hyundai - Accent RB 1.6 Hatch Back 5P T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Hyundai" src="img/hyundai.png"/>
+<div class="card-content">
+<h3>Hyundai - Accent RB 1.6 Hatch Back 5P T/A</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Hyundai - Accent RB 1.6 Hatch Back 5P T/A" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Hyundai" src="img/hyundai.png"/>
+<div class="card-content">
+<h3>Hyundai - Elantra 1,6Lts Sedan 4P T/M</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Hyundai - Elantra 1,6Lts Sedan 4P T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Hyundai" src="img/hyundai.png"/>
+<div class="card-content">
+<h3>Hyundai - Elantra 1,6Lts Sedan 4P T/A</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Hyundai - Elantra 1,6Lts Sedan 4P T/A" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Renault" src="img/renault.png"/>
+<div class="card-content">
+<h3>Renault - Symbol 1,6Lts Sedan 4P T/M</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Renault - Symbol 1,6Lts Sedan 4P T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Toyota" src="img/toyota.png"/>
+<div class="card-content">
+<h3>Toyota - Yaris 1,5Lts Sedan 4P T/M</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Toyota - Yaris 1,5Lts Sedan 4P T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Toyota" src="img/toyota.png"/>
+<div class="card-content">
+<h3>Toyota - Yaris 1,5Lts Sedan 4P T/A</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Toyota - Yaris 1,5Lts Sedan 4P T/A" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Toyota" src="img/toyota.png"/>
+<div class="card-content">
+<h3>Toyota - Yaris 1,5 Hatchback 4P T/M</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Toyota - Yaris 1,5 Hatchback 4P T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Hyundai" src="img/hyundai.png"/>
+<div class="card-content">
+<h3>Hyundai - Accent 1,4Lts Sedan 4P T/M</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Hyundai - Accent 1,4Lts Sedan 4P T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Hyundai" src="img/hyundai.png"/>
+<div class="card-content">
+<h3>Hyundai - Accent 1,4Lts Sedan 4P T/A</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Hyundai - Accent 1,4Lts Sedan 4P T/A" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Hyundai" src="img/hyundai.png"/>
+<div class="card-content">
+<h3>Hyundai - Accent RB 1.4 Hatch Back 5P T/M</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Hyundai - Accent RB 1.4 Hatch Back 5P T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Hyundai" src="img/hyundai.png"/>
+<div class="card-content">
+<h3>Hyundai - Accent RB 1.4 Hatch Back 5P T/A</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Hyundai - Accent RB 1.4 Hatch Back 5P T/A" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Toyota" src="img/toyota.png"/>
+<div class="card-content">
+<h3>Toyota - corolla 1.8 Lts. Sedan T/A</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Toyota - corolla 1.8 Lts. Sedan T/A" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Toyota" src="img/toyota.png"/>
+<div class="card-content">
+<h3>Toyota - corolla 1.8 Lts. Sedan T/M</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Toyota - corolla 1.8 Lts. Sedan T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Kia" src="img/kia.png"/>
+<div class="card-content">
+<h3>Kia - Rio 1,4 Lts Sedan T/M</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Kia - Rio 1,4 Lts Sedan T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Kia" src="img/kia.png"/>
+<div class="card-content">
+<h3>Kia - Rio 1,4 Lts Sedan T/A</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Kia - Rio 1,4 Lts Sedan T/A" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Kia" src="img/kia.png"/>
+<div class="card-content">
+<h3>Kia - Rio 3 1.4 Lts HatchBack  T/A</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Kia - Rio 3 1.4 Lts HatchBack  T/A" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Kia" src="img/kia.png"/>
+<div class="card-content">
+<h3>Kia - Rio 3 1.4 Lts HatchBack   T/M</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Kia - Rio 3 1.4 Lts HatchBack   T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Kia" src="img/kia.png"/>
+<div class="card-content">
+<h3>Kia - Rio 5 1.4 Lts HatchBack 5P T/A</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Kia - Rio 5 1.4 Lts HatchBack 5P T/A" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Kia" src="img/kia.png"/>
+<div class="card-content">
+<h3>Kia - Rio 5 1.4 Lts HatchBack 5P T/M</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Kia - Rio 5 1.4 Lts HatchBack 5P T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Chery" src="img/chery.png"/>
+<div class="card-content">
+<h3>Chery - Arrizo 3 1,5 Lts Sedan T/M</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Chery - Arrizo 3 1,5 Lts Sedan T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Great Wall" src="img/great_wall.png"/>
+<div class="card-content">
+<h3>Great Wall - Volex C30 1,5 Lts Sedan T/M</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Great Wall - Volex C30 1,5 Lts Sedan T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="KIA" src="img/kia.png"/>
+<div class="card-content">
+<h3>KIA - Cerato 1,6 Lts Sedan 4P T/M</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="KIA - Cerato 1,6 Lts Sedan 4P T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Kia" src="img/kia.png"/>
+<div class="card-content">
+<h3>Kia - Cerato 1,6 Lts Sedan 4P T/A</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Kia - Cerato 1,6 Lts Sedan 4P T/A" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - Sonic 1,6Lts Sedan T/M</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - Sonic 1,6Lts Sedan T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Volkswagen" src="img/volkswagen.png"/>
+<div class="card-content">
+<h3>Volkswagen - Virtus 1,6Lts Sedan T/M</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Volkswagen - Virtus 1,6Lts Sedan T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Volkswagen" src="img/volkswagen.png"/>
+<div class="card-content">
+<h3>Volkswagen - Virtus 1,6Lts Sedan T/A</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Volkswagen - Virtus 1,6Lts Sedan T/A" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - Sail 1,5Lts Sedan T/M</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - Sail 1,5Lts Sedan T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - Prisma 1,4Lts Sedan T/A</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - Prisma 1,4Lts Sedan T/A" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Chevrolet" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>Chevrolet - Prisma 1,4Lts Sedan T/M</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Chevrolet - Prisma 1,4Lts Sedan T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="MG" src="img/mg.png"/>
+<div class="card-content">
+<h3>MG - GT Sedán 1,5 Lts. T/M Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="MG - GT Sedán 1,5 Lts. T/M Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="MG" src="img/mg.png"/>
+<div class="card-content">
+<h3>MG - GT Sedán 1,5 Lts. T/A Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="MG - GT Sedán 1,5 Lts. T/A Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Nissan" src="img/nissan.png"/>
+<div class="card-content">
+<h3>Nissan - Sentra 1,8 Sedán T/M Motor</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Nissan - Sentra 1,8 Sedán T/M Motor" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Nissan" src="img/nissan.png"/>
+<div class="card-content">
+<h3>Nissan - sentra 1,8 Sedán T/A Motor Otto Dual (GLP-Gasolina)</h3>
+<p><strong>Cilindrada:</strong> 1.8 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Nissan - sentra 1,8 Sedán T/A Motor Otto Dual (GLP-Gasolina)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="DFM" src="img/dfm.png"/>
+<div class="card-content">
+<h3>DFM - A30 1.6 LTS</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="DFM - A30 1.6 LTS" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="DFM" src="img/dfm.png"/>
+<div class="card-content">
+<h3>DFM - S50 1.5 LTS</h3>
+<p><strong>Cilindrada:</strong> 1.5 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="DFM - S50 1.5 LTS" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="PEUGEUT" src="img/peugeut.png"/>
+<div class="card-content">
+<h3>PEUGEUT - 301 1.6 LTS T/M</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="PEUGEUT - 301 1.6 LTS T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="PEUGEUT" src="img/peugeut.png"/>
+<div class="card-content">
+<h3>PEUGEUT - 301 1.6 LTS T/A</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="PEUGEUT - 301 1.6 LTS T/A" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Kia" src="img/kia.png"/>
+<div class="card-content">
+<h3>Kia - Soluto 1.4 MPI MT sedan</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Kia - Soluto 1.4 MPI MT sedan" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Kia" src="img/kia.png"/>
+<div class="card-content">
+<h3>Kia - Soluto (AB) 1.4 4 AT  Sedan</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Kia - Soluto (AB) 1.4 4 AT  Sedan" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Hyundai" src="img/hyundai.png"/>
+<div class="card-content">
+<h3>Hyundai - Verna CB 1.4 Lts Sedan 4P T/M</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Hyundai - Verna CB 1.4 Lts Sedan 4P T/M" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Hyundai" src="img/hyundai.png"/>
+<div class="card-content">
+<h3>Hyundai - Verna CB 1.4 Lts Sedan 4P T/A</h3>
+<p><strong>Cilindrada:</strong> 1.4 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Hyundai - Verna CB 1.4 Lts Sedan 4P T/A" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Inyeccion Liquida">
+<img alt="Toyota" src="img/toyota.png"/>
+<div class="card-content">
+<h3>Toyota - Corolla SD 1.6 MT</h3>
+<p><strong>Cilindrada:</strong> 1.6 Litros</p>
+<p><strong>Transmisión:</strong> Mecanica </p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> GASMOTION</p>
+<p><strong>Regulador:</strong> nan</p>
+<p><strong>Válvula:</strong> Vialle 67R-010223</p>
+<p><strong>ECU:</strong> Vialle 67R-010335</p>
+<button class="whatsapp-button" data-modelo="Toyota - Corolla SD 1.6 MT" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Prins">
+<img alt="MARCA" src="img/marca.png"/>
+<div class="card-content">
+<h3>MARCA - MODELO</h3>
+<p><strong>Cilindrada:</strong> Cilindrada</p>
+<p><strong>Transmisión:</strong> T/M</p>
+<p><strong>Empresa:</strong> EMPRESA SOLICITANTE</p>
+<p><strong>Kit:</strong> MARCA EQUIPO (KIT)</p>
+<p><strong>Regulador:</strong> REGULADOR DE PRESION</p>
+<p><strong>Válvula:</strong> VALVULA ALIVIO</p>
+<p><strong>ECU:</strong> UNIDAD ELECTRONICA</p>
+<button class="whatsapp-button" data-modelo="MARCA - MODELO" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Prins">
+<img alt="CHEVROLET" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>CHEVROLET - Silverado 5.3 Lts (Fabricacion 2015 al 2019)</h3>
+<p><strong>Cilindrada:</strong> 5.3 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> PRINS</p>
+<p><strong>Regulador:</strong> PRINS 67R 0100054</p>
+<p><strong>Válvula:</strong> Tomasetto 67R 013018</p>
+<p><strong>ECU:</strong> PRINS 67R-010098</p>
+<button class="whatsapp-button" data-modelo="CHEVROLET - Silverado 5.3 Lts (Fabricacion 2015 al 2019)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Prins">
+<img alt="CHEVROLET" src="img/chevrolet.png"/>
+<div class="card-content">
+<h3>CHEVROLET - silverado 5.3 Lts c/simple (Fabricacion 2015 al 2019)</h3>
+<p><strong>Cilindrada:</strong> 5.3 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> PRINS</p>
+<p><strong>Regulador:</strong> PRINS 67R 0100054</p>
+<p><strong>Válvula:</strong> Tomasetto 67R 013018</p>
+<p><strong>ECU:</strong> PRINS 67R-010098</p>
+<button class="whatsapp-button" data-modelo="CHEVROLET - silverado 5.3 Lts c/simple (Fabricacion 2015 al 2019)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Prins">
+<img alt="FORD" src="img/ford.png"/>
+<div class="card-content">
+<h3>FORD - F-150 Platinum 3.5 Lts (Fabricacion 2016 al 2020)</h3>
+<p><strong>Cilindrada:</strong> 3.5 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> PRINS</p>
+<p><strong>Regulador:</strong> PRINS 67R 0100054</p>
+<p><strong>Válvula:</strong> Tomasetto 67R 013018</p>
+<p><strong>ECU:</strong> PRINS 67R-010098</p>
+<button class="whatsapp-button" data-modelo="FORD - F-150 Platinum 3.5 Lts (Fabricacion 2016 al 2020)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Prins">
+<img alt="FORD" src="img/ford.png"/>
+<div class="card-content">
+<h3>FORD - F-150 5.0 Lts (Fabricacion 2018 al 2020)</h3>
+<p><strong>Cilindrada:</strong> 5.0 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> PRINS</p>
+<p><strong>Regulador:</strong> PRINS 67R 0100054</p>
+<p><strong>Válvula:</strong> Tomasetto 67R 013018</p>
+<p><strong>ECU:</strong> PRINS 67R-010098</p>
+<button class="whatsapp-button" data-modelo="FORD - F-150 5.0 Lts (Fabricacion 2018 al 2020)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Prins">
+<img alt="RAM" src="img/ram.png"/>
+<div class="card-content">
+<h3>RAM - 1500 5.7 LTS (Fabricacion  2017 al 2022)</h3>
+<p><strong>Cilindrada:</strong> 5.7 LITROS</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> PRINS</p>
+<p><strong>Regulador:</strong> PRINS 67R 0100054</p>
+<p><strong>Válvula:</strong> Tomasetto 67R 013018</p>
+<p><strong>ECU:</strong> PRINS 67R-010098</p>
+<button class="whatsapp-button" data-modelo="RAM - 1500 5.7 LTS (Fabricacion  2017 al 2022)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Prins">
+<img alt="FORD" src="img/ford.png"/>
+<div class="card-content">
+<h3>FORD - F150 XLT 3.3 Lts Pick up 2P T/A 4X4 (Fabricacion 2018 -2019)</h3>
+<p><strong>Cilindrada:</strong> 3.3 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> PRINS</p>
+<p><strong>Regulador:</strong> PRINS 67R 0100054</p>
+<p><strong>Válvula:</strong> Landirenzo 67R 013018</p>
+<p><strong>ECU:</strong> PRINS 67R-010098</p>
+<button class="whatsapp-button" data-modelo="FORD - F150 XLT 3.3 Lts Pick up 2P T/A 4X4 (Fabricacion 2018 -2019)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Prins">
+<img alt="FORD" src="img/ford.png"/>
+<div class="card-content">
+<h3>FORD - F150 XLT 3.3 Lts Pick up 4P T/A 4X2 (Fabricacion 2018-2019)</h3>
+<p><strong>Cilindrada:</strong> 3.3 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> PRINS</p>
+<p><strong>Regulador:</strong> PRINS 67R 0100054</p>
+<p><strong>Válvula:</strong> Landirenzo 67R 013018</p>
+<p><strong>ECU:</strong> PRINS 67R-010098</p>
+<button class="whatsapp-button" data-modelo="FORD - F150 XLT 3.3 Lts Pick up 4P T/A 4X2 (Fabricacion 2018-2019)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Prins">
+<img alt="FORD" src="img/ford.png"/>
+<div class="card-content">
+<h3>FORD - F150 Raptor 3.5 Lts camioneta 4P T/A (Fabricacion 2017 al 2020)</h3>
+<p><strong>Cilindrada:</strong> 3.5 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> PRINS</p>
+<p><strong>Regulador:</strong> PRINS 67R 0100054</p>
+<p><strong>Válvula:</strong> Landirenzo 67R 013018</p>
+<p><strong>ECU:</strong> PRINS 67R-010098</p>
+<button class="whatsapp-button" data-modelo="FORD - F150 Raptor 3.5 Lts camioneta 4P T/A (Fabricacion 2017 al 2020)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+<div class="card" data-categoria="Prins">
+<img alt="FORD" src="img/ford.png"/>
+<div class="card-content">
+<h3>FORD - F150 Raptor 3.5 Lts camioneta D/Cab  4P T/A (Fabricacion 2017 al 2020)</h3>
+<p><strong>Cilindrada:</strong> 3.5 Litros</p>
+<p><strong>Transmisión:</strong> nan</p>
+<p><strong>Empresa:</strong> GLP Motor Ltda</p>
+<p><strong>Kit:</strong> PRINS</p>
+<p><strong>Regulador:</strong> PRINS 67R 0100054</p>
+<p><strong>Válvula:</strong> Landirenzo 67R 013018</p>
+<p><strong>ECU:</strong> PRINS 67R-010098</p>
+<button class="whatsapp-button" data-modelo="FORD - F150 Raptor 3.5 Lts camioneta D/Cab  4P T/A (Fabricacion 2017 al 2020)" onclick="enviarWhatsApp(this)">Consultar por WhatsApp</button></div>
+</div>
+</div></div>
+<script>
+function filtrar() {
+    const input = document.getElementById('buscador').value.toLowerCase().trim();
+    const categoria = document.getElementById('filtroCategoria').value;
+    const cards = document.querySelectorAll('.card');
+    const zona = document.getElementById('zonaResultados');
+    let resultados = 0;
+
+    // Si el campo de búsqueda está vacío y la categoría es "Todos", ocultar todo
+    if (input === '' && categoria === 'Todos') {
+        zona.style.display = 'none';
+        return;
+    }
+
+    cards.forEach(card => {
+        const texto = card.textContent.toLowerCase();
+        const cardCategoria = card.getAttribute('data-categoria');
+
+        const coincideTexto = texto.includes(input);
+        const coincideCategoria = (categoria === 'Todos') || (cardCategoria === categoria);
+
+        if ((input === '' || coincideTexto) && coincideCategoria) {
+            card.style.display = '';
+            resultados++;
+        } else {
+            card.style.display = 'none';
+        }
+    });
+
+    zona.style.display = (resultados > 0) ? 'flex' : 'none';
+}
+</script>
+<script>
+  function enviarWhatsApp(el) {
+    const card = el.closest(".card");
+    const marca = card.querySelector("h3")?.textContent || "";
+    const mensaje = `Hola! Quisiera consultar mi conversión a GLP para el vehículo ${marca}.`;
+    const url = `https://api.whatsapp.com/send/?phone=%2B56962990269&text=${encodeURIComponent(mensaje)}&type=phone_number&app_absent=0`;
+    window.open(url, '_blank');
+  }
+</script>
+<script>
+function enviarWhatsApp(btn) {
+    const modelo = btn.getAttribute('data-modelo');
+    const mensaje = encodeURIComponent(`Hola, quisiera consultar mi conversión a mi vehículo a GLP: ${modelo}`);
+    const url = `https://api.whatsapp.com/send/?phone=%2B56962990269&text=${mensaje}&type=phone_number&app_absent=0`;
+    window.open(url, '_blank');
+}
+</script></body>
+</html>
