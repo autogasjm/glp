@@ -7,27 +7,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* --- VARIABLES MODO OLED (Dark por defecto) --- */
+            /* --- VARIABLES BASE --- */
             --bg-deep: #000000; 
             --bg-gradient: none; 
-            
             --text-main: #ffffff;
             --text-sec: #a3a3a3; 
-            
             --card-bg: rgba(12, 12, 12, 0.7); 
             --card-border: rgba(255, 255, 255, 0.15);
             --card-shadow: 0 0 0 transparent; 
-            
             --search-bg: rgba(5, 5, 5, 0.9);
             --pill-bg: rgba(255, 255, 255, 0.1);
             --desc-bg: rgba(255, 255, 255, 0.04);
             
-            --accent: #22c55e;
-            --accent-glow: rgba(34, 197, 94, 0.6);
-            --star-color: #FFF;
+            /* Color por defecto (Landirenzo Azul) */
+            --accent: #0066cc;
+            --accent-glow: rgba(0, 102, 204, 0.6);
         }
 
-        /* --- VARIABLES MODO CLARO --- */
+        /* --- MODO CLARO --- */
         [data-theme="light"] {
             --bg-deep: #f0f2f5;
             --bg-gradient: radial-gradient(circle at 50% 0%, #ffffff 0%, #e2e8f0 100%);
@@ -39,275 +36,138 @@
             --search-bg: rgba(255, 255, 255, 0.95);
             --pill-bg: rgba(0, 0, 0, 0.05);
             --desc-bg: rgba(241, 245, 249, 0.9);
-            
-            --accent: #16a34a;
-            --accent-glow: rgba(22, 163, 74, 0.3);
-            --star-color: #94a3b8;
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; transition: background-color 0.4s, color 0.4s, border-color 0.4s, box-shadow 0.4s; }
-
-        body {
-            font-family: 'Outfit', sans-serif;
-            background-color: var(--bg-deep);
-            background-image: var(--bg-gradient);
-            color: var(--text-main);
-            margin: 0; padding: 0;
-            overflow-x: hidden;
-            min-height: 100vh;
-            position: relative;
-        }
-
-        /* --- FONDO ESTELAR ANIMADO --- */
-        .stars-container {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -1; pointer-events: none;
-            transition: filter 0.5s ease;
-        }
+        /* --- COLORES DE MARCA --- */
         
+        /* MODO LANDIRENZO (AZUL) */
+        body.landi-mode {
+            --accent: #0066cc; 
+            --accent-glow: rgba(0, 102, 204, 0.6);
+        }
+
+        /* MODO PRINS (AMARILLO) */
+        body.prins-mode {
+            --accent: #FFCC00; 
+            --accent-glow: rgba(255, 204, 0, 0.5);
+        }
+        [data-theme="light"] body.prins-mode { --accent: #eab308; }
+
+        /* MODO VIALLE (ROJO) */
+        body.vialle-mode {
+            --accent: #dc2626; /* Rojo Intenso */
+            --accent-glow: rgba(220, 38, 38, 0.6);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; transition: background-color 0.4s, color 0.4s, border-color 0.4s, box-shadow 0.4s, transform 0.2s; }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--bg-deep); background-image: var(--bg-gradient); color: var(--text-main); margin: 0; padding: 0; overflow-x: hidden; min-height: 100vh; position: relative; }
+
+        /* ESTRELLAS */
+        .stars-container { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -1; pointer-events: none; transition: filter 0.5s ease; }
         [data-theme="light"] .stars-container { filter: invert(1) opacity(0.3); }
-
-        .stars, .stars2 {
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: transparent;
-        }
-        
-        .stars { 
-            width: 2px; height: 2px;
-            box-shadow: 140px 140px #FFF, 540px 340px #FFF, 340px 940px #FFF, 
-                        740px 240px #FFF, 840px 440px #FFF, 240px 540px #FFF,
-                        140px 840px #FFF, 640px 640px #FFF, 20px 20px #FFF;
-            animation: animStar 60s linear infinite;
-        }
-        .stars2 { 
-            width: 3px; height: 3px;
-            box-shadow: 400px 300px #FFF, 200px 900px #FFF, 800px 100px #FFF;
-            animation: animStar 120s linear infinite;
-            opacity: 0.7;
-        }
-
-        @keyframes animStar {
-            from { transform: translateY(0px); }
-            to { transform: translateY(-2000px); }
-        }
-
-        /* --- BOTÓN TEMA --- */
-        .theme-toggle {
-            position: fixed; top: 20px; right: 20px; z-index: 200;
-            background: var(--search-bg);
-            color: var(--text-main);
-            border: 1px solid var(--card-border);
-            width: 50px; height: 50px; border-radius: 50%;
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-        .theme-toggle:active { transform: scale(0.9); }
+        .stars, .stars2 { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: transparent; }
+        .stars { width: 2px; height: 2px; box-shadow: 140px 140px #FFF, 540px 340px #FFF, 340px 940px #FFF, 740px 240px #FFF, 840px 440px #FFF, 240px 540px #FFF, 140px 840px #FFF, 640px 640px #FFF; animation: animStar 60s linear infinite; }
+        .stars2 { width: 3px; height: 3px; box-shadow: 400px 300px #FFF, 200px 900px #FFF, 800px 100px #FFF; animation: animStar 120s linear infinite; opacity: 0.7; }
+        @keyframes animStar { from { transform: translateY(0px); } to { transform: translateY(-2000px); } }
 
         /* HEADER */
-        header { text-align: center; padding: 4rem 1rem 2rem; position: relative; z-index: 10; }
-        
-        h1 {
-            font-weight: 800; font-size: 3.5rem; margin: 0;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-            line-height: 1.1;
+        header { text-align: center; padding: 3rem 1rem 1rem; position: relative; z-index: 10; }
+        h1 { 
+            font-weight: 800; font-size: 3rem; margin: 0; text-transform: uppercase; letter-spacing: -2px; line-height: 1.1; 
+            background: linear-gradient(90deg, var(--accent) 0%, #ffffff 50%, var(--accent) 100%); 
+            background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            animation: rgbFlow 3s linear infinite; filter: drop-shadow(0 0 20px var(--accent-glow)); 
+        }
+        @keyframes rgbFlow { to { background-position: 200% center; } }
 
-            /* ANIMACIÓN RGB VERDE */
-            background: linear-gradient(
-                90deg, 
-                #166534 0%, 
-                #22c55e 25%, 
-                #4ade80 50%, 
-                #00ff00 75%, 
-                #166534 100%
-            );
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: rgbGreenFlow 3s linear infinite;
-            filter: drop-shadow(0 0 20px rgba(34, 197, 94, 0.4));
+        /* --- SELECTOR DE KIT --- */
+        .kit-selector { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; position: relative; z-index: 100; padding: 0 10px; flex-wrap: wrap; }
+        
+        .kit-btn {
+            background: var(--search-bg); border: 1px solid var(--card-border); color: var(--text-sec);
+            padding: 12px 15px; border-radius: 12px; cursor: pointer; font-weight: 800; font-family: 'Outfit', sans-serif;
+            display: flex; flex-direction: column; align-items: center; gap: 5px; transition: all 0.3s; font-size: 0.9rem;
+            backdrop-filter: blur(10px); flex: 1; min-width: 100px; max-width: 200px;
+        }
+        .kit-btn small { font-weight: 400; font-size: 0.7rem; opacity: 0.8; text-align: center; }
+
+        /* ESTILO LANDIRENZO (AZUL) */
+        .kit-btn.landi:hover { border-color: #0066cc; color: #0066cc; }
+        .kit-btn.landi.active {
+            background: linear-gradient(135deg, #004080 0%, #0066cc 100%);
+            border-color: #0066cc; color: white;
+            box-shadow: 0 0 25px rgba(0, 102, 204, 0.5); transform: scale(1.05);
         }
 
-        @keyframes rgbGreenFlow {
-            to { background-position: 200% center; }
+        /* ESTILO PRINS (AMARILLO) */
+        .kit-btn.prins:hover { border-color: #FFCC00; color: #FFCC00; }
+        .kit-btn.prins.active {
+            background: linear-gradient(135deg, #00264d 30%, #FFCC00 100%);
+            border-color: #FFCC00; color: white;
+            box-shadow: 0 0 25px rgba(255, 204, 0, 0.4); transform: scale(1.05);
+        }
+        .kit-btn.prins.active small { color: rgba(255,255,255, 0.9); text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
+
+        /* ESTILO VIALLE (ROJO) */
+        .kit-btn.vialle:hover { border-color: #dc2626; color: #dc2626; }
+        .kit-btn.vialle.active {
+            background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%);
+            border-color: #dc2626; color: white;
+            box-shadow: 0 0 25px rgba(220, 38, 38, 0.5); transform: scale(1.05);
         }
 
         /* SEARCH BAR */
-        .search-wrapper {
-            position: sticky; top: 15px; z-index: 100;
-            display: flex; justify-content: center; padding: 0 20px;
-        }
-
-        .search-capsule {
-            background: var(--search-bg);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            padding: 12px 25px; border-radius: 50px;
-            display: flex; align-items: center; gap: 15px;
-            box-shadow: var(--card-shadow);
-            border: 1px solid var(--card-border);
-            width: 100%; max-width: 700px;
-            transition: all 0.3s;
-        }
-
-        .search-capsule:focus-within {
-            border-color: var(--accent);
-            box-shadow: 0 0 25px var(--accent-glow);
-        }
-
-        input {
-            border: none; background: transparent; font-size: 16px; 
-            padding: 5px; flex-grow: 1; outline: none;
-            color: var(--text-main); font-family: 'Outfit', sans-serif;
-        }
+        .search-wrapper { position: sticky; top: 15px; z-index: 100; display: flex; justify-content: center; padding: 0 20px; }
+        .search-capsule { background: var(--search-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 12px 25px; border-radius: 50px; display: flex; align-items: center; gap: 15px; box-shadow: var(--card-shadow); border: 1px solid var(--card-border); width: 100%; max-width: 700px; transition: all 0.3s; }
+        .search-capsule:focus-within { border-color: var(--accent); box-shadow: 0 0 25px var(--accent-glow); }
+        input { border: none; background: transparent; font-size: 16px; padding: 5px; flex-grow: 1; outline: none; color: var(--text-main); font-family: 'Outfit', sans-serif; }
         input::placeholder { color: var(--text-sec); opacity: 0.6; }
-        
-        select {
-            border: none; background: transparent;
-            border-left: 1px solid var(--text-sec);
-            padding: 5px 20px; font-size: 16px;
-            color: var(--accent); cursor: pointer; outline: none;
-            font-family: 'Outfit', sans-serif; font-weight: 600;
-        }
+        select { border: none; background: transparent; border-left: 1px solid var(--text-sec); padding: 5px 20px; font-size: 16px; color: var(--accent); cursor: pointer; outline: none; font-family: 'Outfit', sans-serif; font-weight: 600; max-width: 150px; }
         select option { background: #000; color: #fff; }
         [data-theme="light"] select option { background: #fff; color: #000; }
 
         /* GRID */
-        .container { max-width: 1200px; margin: 20px auto; padding: 0 20px; padding-bottom: 80px; position: relative; z-index: 5; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 20px 80px; position: relative; z-index: 5; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
-
-        .empty-state {
-            text-align: center; margin-top: 80px; color: var(--text-sec);
-            display: none; animation: fadeIn 1s; padding: 0 20px;
-        }
+        .empty-state { text-align: center; margin-top: 80px; color: var(--text-sec); display: block; animation: fadeIn 1s; padding: 0 20px; }
         .empty-icon { font-size: 5rem; opacity: 0.5; margin-bottom: 20px; filter: grayscale(1); }
-        [data-theme="light"] .empty-icon { filter: grayscale(0); }
 
-        /* TARJETAS */
-        .card {
-            background: var(--card-bg);
-            border-radius: 20px; overflow: hidden;
-            border: 1px solid var(--card-border);
-            backdrop-filter: blur(12px);
-            display: flex; flex-direction: column;
-            opacity: 0; animation: slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            position: relative;
-            box-shadow: var(--card-shadow);
-        }
-
-        .card:active { transform: scale(0.98); }
-
-        .card::after {
-            content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-            background: var(--accent); opacity: 0.7;
-        }
-
+        /* CARDS */
+        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid var(--card-border); backdrop-filter: blur(12px); display: flex; flex-direction: column; opacity: 0; animation: slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; position: relative; box-shadow: var(--card-shadow); }
+        .card::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent); opacity: 0.7; }
         .card-header { padding: 20px 20px 5px 20px; }
-
-        .brand-tag {
-            font-size: 0.8rem; font-weight: 800; text-transform: uppercase;
-            letter-spacing: 2px; color: var(--accent); margin-bottom: 5px; display: block;
-        }
-
-        .model-name {
-            font-size: 1.5rem; font-weight: 700; line-height: 1.1;
-            color: var(--text-main); letter-spacing: -0.5px;
-        }
-
+        .brand-tag { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 5px; display: block; }
+        .model-name { font-size: 1.4rem; font-weight: 700; line-height: 1.1; color: var(--text-main); letter-spacing: -0.5px; }
         .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; gap: 15px; }
-
-        .description-box {
-            background: var(--desc-bg); padding: 12px; border-radius: 12px;
-            font-size: 0.9rem; color: var(--text-sec); line-height: 1.5;
-            border: 1px solid var(--pill-bg);
-        }
-
-        .tech-box {
-            font-size: 0.9rem; color: var(--accent); font-weight: 600;
-            display: flex; align-items: center; gap: 8px;
-        }
-
+        .description-box { background: var(--desc-bg); padding: 12px; border-radius: 12px; font-size: 0.9rem; color: var(--text-sec); line-height: 1.5; border: 1px solid var(--pill-bg); }
+        .tech-box { font-size: 0.9rem; color: var(--accent); font-weight: 600; display: flex; align-items: center; gap: 8px; }
         .specs { display: flex; flex-wrap: wrap; gap: 6px; }
-
-        .pill {
-            background: var(--pill-bg); padding: 5px 10px; border-radius: 6px;
-            font-size: 0.75rem; font-weight: 600; color: var(--text-main);
-            display: flex; align-items: center; gap: 5px;
-            border: 1px solid var(--card-border);
-        }
-
-        /* BOTÓN WHATSAPP */
-        .btn-whatsapp {
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            color: white; text-decoration: none;
-            padding: 14px; border-radius: 12px;
-            font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
-            text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px;
-            margin-top: 10px; position: relative; overflow: hidden;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2);
-            font-size: 0.95rem;
-        }
+        .pill { background: var(--pill-bg); padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; color: var(--text-main); display: flex; align-items: center; gap: 5px; border: 1px solid var(--card-border); }
         
-        .btn-whatsapp:active { transform: translateY(2px); }
-
-        .footer-info {
-            padding: 12px 20px;
-            background: rgba(0,0,0,0.2);
-            border-top: 1px solid var(--card-border);
-            display: flex; justify-content: space-between; align-items: center;
-            font-size: 0.75rem; color: var(--text-sec);
+        .btn-whatsapp { 
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); 
+            color: white; text-decoration: none; padding: 14px; border-radius: 12px; font-weight: 800; 
+            text-transform: uppercase; letter-spacing: 1px; text-align: center; display: flex; 
+            align-items: center; justify-content: center; gap: 10px; margin-top: 10px; 
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2); font-size: 0.95rem; 
         }
+        .btn-whatsapp:active { transform: scale(0.98); }
 
-        .copy-btn {
-            background: transparent; border: none; padding: 5px;
-            color: var(--text-sec); cursor: pointer; font-weight: 700; font-size: 0.75rem;
-        }
+        .footer-info { padding: 12px 20px; background: rgba(0,0,0,0.2); border-top: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--text-sec); }
+        .copy-btn { background: transparent; border: none; padding: 5px; color: var(--text-sec); cursor: pointer; font-weight: 700; font-size: 0.75rem; }
+        .theme-toggle { position: fixed; top: 20px; right: 20px; z-index: 200; background: var(--search-bg); color: var(--text-main); border: 1px solid var(--card-border); width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; backdrop-filter: blur(10px); box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
 
         @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         @keyframes fadeIn { to { opacity: 1; } }
 
-        /* --- MEDIA QUERIES PARA CELULARES --- */
         @media(max-width: 600px) {
-            h1 { font-size: 2.3rem; }
-            header { padding-top: 3.5rem; }
-
-            .search-wrapper { padding: 0 15px; top: 10px; }
-            
-            .search-capsule { 
-                flex-direction: column;
-                border-radius: 20px; 
-                padding: 15px; 
-                align-items: stretch;
-                gap: 10px;
-            }
-
+            h1 { font-size: 2rem; }
+            header { padding-top: 4rem; }
+            .search-capsule { flex-direction: column; border-radius: 20px; padding: 15px; align-items: stretch; gap: 10px; }
             .search-capsule span { display: none; }
-
-            input {
-                width: 100%;
-                border-bottom: 1px solid var(--card-border);
-                padding-bottom: 10px;
-                text-align: center;
-            }
-
-            select {
-                width: 100%;
-                border-left: none;
-                padding: 5px 0;
-                text-align: center;
-                text-align-last: center;
-            }
-
-            .container { margin-top: 20px; padding: 0 15px 80px 15px; }
-            
-            .grid { 
-                grid-template-columns: 1fr; 
-                gap: 20px;
-            }
-
-            .theme-toggle { top: 15px; right: 15px; width: 40px; height: 40px; font-size: 1.2rem; }
-            
-            .empty-state h3 { font-size: 1.2rem; }
+            input { width: 100%; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; text-align: center; }
+            select { width: 100%; border-left: none; padding: 5px 0; text-align: center; text-align-last: center; max-width: none; }
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -324,10 +184,25 @@
     <h1>Catálogo Certificado</h1>
 </header>
 
+<div class="kit-selector">
+    <button class="kit-btn landi active" onclick="setKit('LANDIRENZO')">
+        🔵 LANDIRENZO
+        <small>Inyección Gaseosa</small>
+    </button>
+    <button class="kit-btn prins" onclick="setKit('PRINS')">
+        🟡 PRINS
+        <small>Inyección Directa</small>
+    </button>
+    <button class="kit-btn vialle" onclick="setKit('VIALLE')">
+        🔴 VIALLE
+        <small>Inyección Líquida</small>
+    </button>
+</div>
+
 <div class="search-wrapper">
     <div class="search-capsule">
         <span style="font-size: 1.2rem; opacity: 0.7;">🔍</span>
-        <input type="text" id="searchInput" placeholder="Busca tu nave..." autocomplete="off">
+        <input type="text" id="searchInput" placeholder="Escribe tu modelo aquí..." autocomplete="off">
         <select id="brandFilter">
             <option value="">Todas las Marcas</option>
         </select>
@@ -337,18 +212,18 @@
 <div class="container">
     <div id="grid" class="grid"></div>
     
-    <div id="emptyState" class="empty-state" style="display:block">
+    <div id="emptyState" class="empty-state">
         <div class="empty-icon">🚀</div>
-        <h3 style="color: var(--text-main);">Explora el Universo GLP</h3>
-        <p>Escribe el modelo o selecciona una marca para iniciar el despegue.</p>
+        <h3 id="emptyTitle" style="color: var(--text-main);">Inicia tu búsqueda</h3>
+        <p id="emptyText">Selecciona una marca o escribe el modelo para ver resultados.</p>
     </div>
 </div>
 
 <script>
-    // --- LÓGICA DE TEMAS (CLARO/OSCURO) ---
     const themeBtn = document.getElementById('themeBtn');
     const html = document.documentElement;
-
+    const body = document.body;
+    
     const savedTheme = localStorage.getItem('theme') || 'dark';
     html.setAttribute('data-theme', savedTheme);
     updateIcon(savedTheme);
@@ -356,240 +231,348 @@
     themeBtn.addEventListener('click', () => {
         const current = html.getAttribute('data-theme');
         const next = current === 'dark' ? 'light' : 'dark';
-        
         html.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
         updateIcon(next);
     });
 
-    function updateIcon(theme) {
-        themeBtn.innerHTML = theme === 'dark' ? '☀️' : '🌙';
-    }
+    function updateIcon(theme) { themeBtn.innerHTML = theme === 'dark' ? '☀️' : '🌙'; }
 
     // --- BASE DE DATOS COMPLETA (ACTUALIZADA) ---
     const db = [
-        // --- KIT LANDIRENZO (INYECCIÓN GASEOSA) ---
-        {d:"13/08/2010", m:"Nissan", mod:"Tiida 1,6 Lts., DOHC Sedán 4P.", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"NSGLPBS3490710", t:"PASAJEROS"},
-        {d:"09/03/2012", m:"Hyundai", mod:"Accent RB 1,6 Lts., Sedán 4P.", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"HYGLPBS4370212", t:"PASAJEROS"},
-        {d:"09/03/2012", m:"Hyundai", mod:"Accent RB 1.6 Hatch Back 5P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"HYGLPBS4370212", t:"HATCHBACK"},
-        {d:"09/03/2012", m:"Hyundai", mod:"Accent RB 1.6 Hatch Back 5P", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"HYGLPBS4370212", t:"HATCHBACK"},
-        {d:"20/07/2012", m:"Hyundai", mod:"Sonata 2,0 Lts., Sedan 4P", cil:"2.0", tr:"Automática", k:"LANDIRENZO", c:"HYGLPBS4600612", t:"PASAJEROS"},
-        {d:"31/07/2012", m:"Nissan", mod:"Versa 1,6 Lts., Sedan 4P.", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"NSGLPBS4650712", t:"PASAJEROS"},
-        {d:"31/07/2012", m:"Nissan", mod:"Versa 1,6 Lts., Sedan 4P.", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"NSGLPBS4650712", t:"PASAJEROS"},
-        {d:"31/07/2012", m:"Nissan", mod:"Sentra 2,0 Lts., Sedan 4P.", cil:"2.0", tr:"Automática", k:"LANDIRENZO", c:"NSGLPBS4670712", t:"PASAJEROS"},
-        {d:"13/08/2012", m:"Hyundai", mod:"Elantra 1,6 Lts., Sedan 4P.", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"HYGLPBS4690812", t:"PASAJEROS"},
-        {d:"30/01/2013", m:"Hyundai", mod:"Sonata 2,0 Lts., Sedan 4P.", cil:"2.0", tr:"Mecánica", k:"LANDIRENZO", c:"HYGLPBS4861012", t:"PASAJEROS"},
-        {d:"31/05/2013", m:"Volkswagen", mod:"Saveiro 1,6 Lts., Pick Up 2P.", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"VWGLPBS5270413", t:"COMERCIAL"},
-        {d:"21/10/2013", m:"DFM", mod:"S30 1,6 Lts., DOHC Sedan 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"DFGLPBS5510913", t:"PASAJEROS"},
-        {d:"25/03/2014", m:"Kia", mod:"Cerato 1,6 Lts., Sedan 4P.", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPBS5730214", t:"PASAJEROS"},
-        {d:"03/04/2014", m:"Toyota", mod:"Yaris 1,5 Lts., DOHC Sedan 4P.", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"TYGLPBS5760314", t:"PASAJEROS"},
-        {d:"03/04/2014", m:"Toyota", mod:"Yaris 1,5 Lts., DOHC Sedan 4P.", cil:"1.5", tr:"Automática", k:"LANDIRENZO", c:"TYGLPBS5760314", t:"PASAJEROS"},
-        {d:"15/04/2014", m:"Geely", mod:"EC7 1,8 Lts., DOHC Sedan 4P.", cil:"1.8", tr:"Mecánica", k:"LANDIRENZO", c:"GYGLPBS5780314", t:"PASAJEROS"},
-        {d:"15/04/2014", m:"Geely", mod:"EC7 1,8 Lts., DOHC Sedan 4P.", cil:"1.8", tr:"Automática", k:"LANDIRENZO", c:"GYGLPBS5780314", t:"PASAJEROS"},
-        {d:"01/05/2014", m:"Hyundai", mod:"Accent RB 1,4 Lts., Sedán 4P.", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"HYGLPBS5840414", t:"PASAJEROS"},
-        {d:"01/05/2014", m:"Hyundai", mod:"Accent RB 1.4 Hatch Back 5P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"HYGLPBS5840414", t:"HATCHBACK"},
-        {d:"01/05/2014", m:"Hyundai", mod:"Accent RB 1.4 Hatch Back 5P", cil:"1.4", tr:"Automática", k:"LANDIRENZO", c:"HYGLPBS5840414", t:"HATCHBACK"},
-        {d:"16/05/2014", m:"Volkswagen", mod:"Voyage 1,6 Lts., SOHC Sedan 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"VWGLPBS5850414", t:"PASAJEROS"},
-        {d:"19/01/2015", m:"DFM", mod:"S30 1,6 Lts., DOHC Sedan 4P.", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"DFGLPBS6991214", t:"PASAJEROS"},
-        {d:"19/01/2015", m:"Toyota", mod:"Corolla 1,8 Lts., DOHC Sedán 4P.", cil:"1.8", tr:"Mecánica", k:"LANDIRENZO", c:"TYGLPBS6691014", t:"PASAJEROS"},
-        {d:"19/01/2015", m:"Toyota", mod:"Corolla 1,8 Lts., DOHC Sedán 4P.", cil:"1.8", tr:"Automática", k:"LANDIRENZO", c:"TYGLPBS6691014", t:"PASAJEROS"},
-        {d:"26/02/2015", m:"Chevrolet", mod:"N300 Max 1,2 Lts., DOHC Furgón 5P.", cil:"1.2", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPBS6981214", t:"COMERCIAL"},
-        {d:"06/05/2015", m:"MAZDA", mod:"3 1,6 Lts., DOHC Sedán 4P.", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"MZGLPBS7100315", t:"PASAJEROS"},
-        {d:"24/06/2015", m:"Renault", mod:"Symbol 1,6 Lts., SOHC Sedan 4P.", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"RNGLPBS7230415", t:"PASAJEROS"},
-        {d:"20/07/2015", m:"Gac Gonow", mod:"Way Cargo 1,0Lts. Furgón 5P.", cil:"1.0", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7220415", t:"COMERCIAL"},
-        {d:"20/07/2015", m:"Gac Gonow", mod:"Way 1,3 Lts. Camioneta 4P.", cil:"1.3", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7240415", t:"COMERCIAL"},
-        {d:"28/07/2015", m:"Gac Gonow", mod:"Way 1,0 Lts. Camioneta 2P.", cil:"1.0", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7220415", t:"COMERCIAL"},
-        {d:"28/07/2015", m:"Gac Gonow", mod:"Way 1,0 Lts. Camioneta 4P.", cil:"1.0", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7220415", t:"COMERCIAL"},
-        {d:"28/07/2015", m:"Gac Gonow", mod:"Way Cargo Box 1,0 Lts. Camioneta 2P.", cil:"1.0", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7220415", t:"COMERCIAL"},
-        {d:"28/07/2015", m:"Gac Gonow", mod:"Way 1,3 Lts. Camioneta 2P.", cil:"1.3", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7240415", t:"COMERCIAL"},
-        {d:"28/07/2015", m:"Gac Gonow", mod:"Way 1,3 Lts. Furgón 5P.", cil:"1.3", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7240415", t:"COMERCIAL"},
-        {d:"28/07/2015", m:"Gac Gonow", mod:"Way Cargo Box Frio 1,3 Lts.", cil:"1.3", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7240415", t:"COMERCIAL"},
-        {d:"28/07/2015", m:"Gac Gonow", mod:"Way Cargo Box 1,3 Lts.", cil:"1.3", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7240415", t:"COMERCIAL"},
-        {d:"14/12/2015", m:"Nissan", mod:"Sentra 1,8 Lts., Sedan 4P.", cil:"1.8", tr:"Automática", k:"LANDIRENZO", c:"NSGLPBS7991115", t:"PASAJEROS"},
-        {d:"20/12/2016", m:"Chevrolet", mod:"Sail 1,4 Lts Sedan 4P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPBS8551116", t:"PASAJEROS"},
-        {d:"28/12/2016", m:"Nissan", mod:"Sentra 1,8 Lts., Sedan 4P.", cil:"1.8", tr:"Mecánica", k:"LANDIRENZO", c:"NSGLPBS8531116", t:"PASAJEROS"},
-        {d:"26/01/2017", m:"Foton", mod:"Midi Truck 1,3 Lts Pick-up 2P", cil:"1.3", tr:"Mecánica", k:"LANDIRENZO", c:"FNGLPBS8590117", t:"COMERCIAL"},
-        {d:"26/01/2017", m:"Foton", mod:"Midi doble cabina 1,3 Lts Pick-up 4P", cil:"1.3", tr:"Mecánica", k:"LANDIRENZO", c:"FNGLPBS8590117", t:"COMERCIAL"},
-        {d:"16/02/2017", m:"Fiat", mod:"Strada 1,6 Lts Pick-up 2P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"FTGLPPBS8620117", t:"COMERCIAL"},
-        {d:"09/06/2017", m:"Foton", mod:"K1 Cargo 2,0 Lts Furgon", cil:"2.0", tr:"Mecánica", k:"LANDIRENZO", c:"FNGLPGM8720517", t:"COMERCIAL"},
-        {d:"16/06/2017", m:"DFM", mod:"A30 1,6 Lts Sedan 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"DFGLPGM8710517", t:"PASAJEROS"},
-        {d:"21/03/2018", m:"Kia", mod:"Rio 4 1,4 Lts Sedan 4P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM9300218", t:"PASAJEROS"},
-        {d:"21/03/2018", m:"Kia", mod:"Rio 4 1,4 Lts Sedan 4P", cil:"1.4", tr:"Automática", k:"LANDIRENZO", c:"KIGLPGM9300218", t:"PASAJEROS"},
-        {d:"21/03/2018", m:"Kia", mod:"Rio 3 1.4 Lts HatchBack", cil:"1.4", tr:"Automática", k:"LANDIRENZO", c:"KIGLPGM9300218", t:"HATCHBACK"},
-        {d:"21/03/2018", m:"Kia", mod:"Rio 3 1.4 Lts HatchBack", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM9300218", t:"HATCHBACK"},
-        {d:"21/03/2018", m:"Kia", mod:"Rio 5 1.4 Lts HatchBack 5P", cil:"1.4", tr:"Automática", k:"LANDIRENZO", c:"KIGLPGM9300218", t:"HATCHBACK"},
-        {d:"21/03/2018", m:"Kia", mod:"Rio 5 1.4 Lts HatchBack 5P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM9300218", t:"HATCHBACK"},
-        {d:"30/07/2020", m:"Chevrolet", mod:"sail 1,5 Lts Sedan 4P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM10400720", t:"PASAJEROS"},
-        {d:"30/07/2020", m:"Chevrolet", mod:"sail 1,5 Lts Sedan 4P", cil:"1.5", tr:"Automática", k:"LANDIRENZO", c:"CHGLPGM10400720", t:"PASAJEROS"},
-        {d:"31/07/2020", m:"Hyundai", mod:"Verna 1.4 Lts Sedan 4P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"HYGLPGM10390720", t:"PASAJEROS"},
-        {d:"11/08/2020", m:"Chevrolet", mod:"Tracker FWD 1.8 Lts. Station Wagon 5P 4X2", cil:"1.8", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM10420820", t:"SUV"},
-        {d:"11/08/2020", m:"Chevrolet", mod:"Tracker AWD 1.8 Lts. Station Wagon 5P 4X4", cil:"1.8", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM10420820", t:"SUV"},
-        {d:"11/08/2020", m:"Chevrolet", mod:"Tracker AWD 1.8 Lts. DOHC Station Wagon 5P 4X4", cil:"1.8", tr:"Automática", k:"LANDIRENZO", c:"CHGLPGM10420820", t:"SUV"},
-        {d:"11/08/2020", m:"Chevrolet", mod:"Tracker FWD 1.8 Lts. DOHC Station Wagon 5P 4X2", cil:"1.8", tr:"Automática", k:"LANDIRENZO", c:"CHGLPGM10420820", t:"SUV"},
-        {d:"11/08/2020", m:"Chevrolet", mod:"Tracker FWD 1.8 Lts. DOHC Station Wagon 5P 4X2", cil:"1.8", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM10420820", t:"SUV"},
-        {d:"11/08/2020", m:"Chevrolet", mod:"Tracker AWD 1.8 Lts. DOHC Station Wagon 5P 4X4", cil:"1.8", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM10420820", t:"SUV"},
-        {d:"20/08/2020", m:"JAC", mod:"Grand S3 1.6 Lts Hatch back 5P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"JCGLPGM10430820", t:"HATCHBACK"},
-        {d:"24/08/2020", m:"GREAT WALL", mod:"C30 1.5 Lts. Sedan 4P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"GWGLPGM10440820", t:"PASAJEROS"},
-        {d:"09/09/2020", m:"Chevrolet", mod:"Spin 1.8 Lts Sedan wagon 7 asientos 5 P", cil:"1.8", tr:"Automática", k:"LANDIRENZO", c:"CHGLPGM10490920", t:"COMERCIAL"},
-        {d:"09/09/2020", m:"Chevrolet", mod:"Spin 1.8 Lts Sedan wagon 7 asientos 5 P", cil:"1.8", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM10490920", t:"COMERCIAL"},
-        {d:"09/09/2020", m:"Chevrolet", mod:"Spin Activ 1.8 Lts Station Wagon 7 Asientos 5P", cil:"1.8", tr:"Automática", k:"LANDIRENZO", c:"CHGLPGM10490920", t:"COMERCIAL"},
-        {d:"09/09/2020", m:"Chevrolet", mod:"Spin Activ 1.8 Lts Station Wagon 7 Asientos 5P", cil:"1.8", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM10490920", t:"COMERCIAL"},
-        {d:"15/09/2020", m:"GREAT WALL", mod:"M4 1.5 Lts. Hatchback 5P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"GWGLPGM10480920", t:"HATCHBACK"},
-        {d:"23/09/2020", m:"Chery", mod:"Tiggo 2 1.5 Lts Station Wagon 5P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CYGLPGM10510920", t:"SUV"},
-        {d:"23/09/2020", m:"Chery", mod:"Tiggo 2 1.5 Lts Station Wagon 5P", cil:"1.5", tr:"Automática", k:"LANDIRENZO", c:"CYGLPGM10510920", t:"SUV"},
-        {d:"28/09/2020", m:"UAZ", mod:"Hunter 2.7 Lts Station Wagon Tipo Jeep 5P 4X4", cil:"2.7", tr:"Mecánica", k:"LANDIRENZO", c:"UZGLPGM10530920", t:"JEEP"},
-        {d:"06/10/2020", m:"JAC", mod:"S2 1.5 Lts Hatch Back 5P 4x2", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"JCGLPGM10580920", t:"HATCHBACK"},
-        {d:"09/10/2020", m:"Chevrolet", mod:"Cavalier 1.5 Lts Sedan 4P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM10540920", t:"PASAJEROS"},
-        {d:"09/10/2020", m:"Chevrolet", mod:"Cavalier 1.5 Lts Sedan 4P", cil:"1.5", tr:"Automática", k:"LANDIRENZO", c:"CHGLPGM10540920", t:"PASAJEROS"},
-        {d:"22/10/2020", m:"Volkswagen", mod:"Virtus 1.6 Lts. Sedan 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"VWGLPGM10621020", t:"PASAJEROS"},
-        {d:"22/10/2020", m:"Volkswagen", mod:"Virtus 1.6 Lts. Sedan 4P", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"VWGLPGM10621020", t:"PASAJEROS"},
-        {d:"23/11/2020", m:"Changan", mod:"CS35 1.6 Lts Station Wagon 5P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"CNGLPGM10801120", t:"SUV"},
-        {d:"23/11/2020", m:"Changan", mod:"CS35 1.6 Lts Station Wagon 5P", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"CNGLPGM10801120", t:"SUV"},
-        {d:"23/11/2020", m:"Changan", mod:"CS35 1.6 Lts DOHC Station Wagon 5P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"CNGLPGM10801120", t:"SUV"},
-        {d:"23/11/2020", m:"Changan", mod:"CS35 1.6 Lts DOHC Station Wagon 5P", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"CNGLPGM10801120", t:"SUV"},
-        {d:"23/11/2020", m:"Changan", mod:"CS35 Plus 1.6 Lts Station Wagon 5P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"CNGLPGM10801120", t:"SUV"},
-        {d:"23/11/2020", m:"Changan", mod:"CS35 Plus 1.6 Lts Station Wagon 5P", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"CNGLPGM10801120", t:"SUV"},
-        {d:"25/11/2020", m:"Changan", mod:"CS15 1.5 Lts Hatchback", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CNGLPGM10791120", t:"HATCHBACK"},
-        {d:"25/11/2020", m:"Changan", mod:"CS15 1.5 Lts Hatchback", cil:"1.5", tr:"Automática", k:"LANDIRENZO", c:"CNGLPGM10791120", t:"HATCHBACK"},
-        {d:"30/11/2020", m:"Suzuki", mod:"Grand Nomade 2.4 Lts DOHC Station Wagon 5P 4WD", cil:"2.4", tr:"Mecánica", k:"LANDIRENZO", c:"SZGLPGM10861120", t:"CAMIONETA"},
-        {d:"30/11/2020", m:"Suzuki", mod:"Grand Nomade 2.4 Lts DOHC Station Wagon 5P 4WD", cil:"2.4", tr:"Mec/Auto", k:"LANDIRENZO", c:"SZGLPGM10861120", t:"CAMIONETA"},
-        {d:"30/11/2020", m:"Suzuki", mod:"Grand Nomade 2.4 Lts DOHC Station Wagon 5P 2WD", cil:"2.4", tr:"Mecánica", k:"LANDIRENZO", c:"SZGLPGM10861120", t:"CAMIONETA"},
-        {d:"30/11/2020", m:"Suzuki", mod:"Grand Nomade 2.4 Lts DOHC Station Wagon 5P 2WD", cil:"2.4", tr:"Automática", k:"LANDIRENZO", c:"SZGLPGM10861120", t:"CAMIONETA"},
-        {d:"30/11/2020", m:"Chery", mod:"Arrizo 7 1.5 Lts DOHC Sedan 4P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CYGLPGM10751120", t:"PASAJEROS"},
-        {d:"21/12/2020", m:"Subaru", mod:"XV 1.6 Lts CVT Station Wagon 5P 4X4", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"SBGLPGM10851120", t:"SUV"},
-        {d:"21/12/2020", m:"Subaru", mod:"XV 1.6 Lts DOHC Station Wagon 5P 4X4", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"SBGLPGM10851120", t:"SUV"},
-        {d:"21/12/2020", m:"Suzuki", mod:"Swift 1.2 Lts DOHC Hatchback 5P 4X2", cil:"1.2", tr:"Mecánica", k:"LANDIRENZO", c:"SZGLPGM10731120", t:"HATCHBACK"},
-        {d:"21/12/2020", m:"Suzuki", mod:"Swift 1.2 Lts Hatchback 5P 4X2", cil:"1.2", tr:"Automática", k:"LANDIRENZO", c:"SZGLPGM10731120", t:"HATCHBACK"},
-        {d:"21/12/2020", m:"Suzuki", mod:"Swift Dzire 1.2 Lts DOHC Sedan 4P 4X2", cil:"1.2", tr:"Mecánica", k:"LANDIRENZO", c:"SZGLPGM10731120", t:"PASAJEROS"},
-        {d:"21/12/2020", m:"Suzuki", mod:"Swift Dzire 1.2 Lts Sedan 4P 4X2", cil:"1.2", tr:"Automática", k:"LANDIRENZO", c:"SZGLPGM10731120", t:"PASAJEROS"},
+        // --- LANDIRENZO ---
+        {d:"13/08/2010", m:"Nissan", mod:"Tiida 1.6 DOHC Sedán 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"NSGLPBS3490710", t:"PASAJEROS"},
+        {d:"27/09/2011", m:"Samsung", mod:"SM3 1.6 Sedán 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"RSGLPBS3850911", t:"PASAJEROS"},
+        {d:"09/03/2012", m:"Hyundai", mod:"Accent RB 1.6 Sedán 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"HYGLPBS4370212", t:"PASAJEROS"},
+        {d:"09/03/2012", m:"Hyundai", mod:"Accent RB 1.6 Hatchback 5P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"HYGLPBS4370212", t:"HATCHBACK"},
+        {d:"09/03/2012", m:"Hyundai", mod:"Accent RB 1.6 Hatchback 5P", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"HYGLPBS4370212", t:"HATCHBACK"},
+        {d:"26/06/2012", m:"Samsung", mod:"SM5 2.0 Sedan 4P", cil:"2.0", tr:"Automática", k:"LANDIRENZO", c:"RSGLPBS4540612", t:"PASAJEROS"},
+        {d:"20/07/2012", m:"Hyundai", mod:"Sonata 2.0 Sedan 4P", cil:"2.0", tr:"Automática", k:"LANDIRENZO", c:"HYGLPBS4600612", t:"PASAJEROS"},
+        {d:"31/07/2012", m:"Nissan", mod:"Versa 1.6 Sedan 4P", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"NSGLPBS4650712", t:"PASAJEROS"},
+        {d:"31/07/2012", m:"Nissan", mod:"Versa 1.6 Sedan 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"NSGLPBS4650712", t:"PASAJEROS"},
+        {d:"31/07/2012", m:"Nissan", mod:"Sentra 2.0 Sedan 4P", cil:"2.0", tr:"Automática", k:"LANDIRENZO", c:"NSGLPBS4670712", t:"PASAJEROS"},
+        {d:"13/08/2012", m:"Hyundai", mod:"Elantra 1.6 Sedan 4P", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"HYGLPBS4690812", t:"PASAJEROS"},
+        {d:"15/08/2012", m:"Samsung", mod:"SM3 1.6 4P", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"RSGLPBS4700812", t:"PASAJEROS"},
+        {d:"30/01/2013", m:"Hyundai", mod:"Sonata 2.0 Sedan 4P", cil:"2.0", tr:"Mecánica", k:"LANDIRENZO", c:"HYGLPBS4861012", t:"PASAJEROS"},
+        {d:"21/10/2013", m:"DFM", mod:"S30 1.6 DOHC Sedan 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"DFGLPBS5510913", t:"PASAJEROS"},
+        {d:"25/03/2014", m:"Kia", mod:"Cerato 1.6 Sedan 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPBS5730214", t:"PASAJEROS"},
+        {d:"03/04/2014", m:"Toyota", mod:"Yaris 1.5 DOHC Sedan 4P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"TYGLPBS5760314", t:"PASAJEROS"},
+        {d:"03/04/2014", m:"Toyota", mod:"Yaris 1.5 DOHC Sedan 4P", cil:"1.5", tr:"Automática", k:"LANDIRENZO", c:"TYGLPBS5760314", t:"PASAJEROS"},
+        {d:"15/04/2014", m:"Geely", mod:"EC7 1.8 DOHC Sedan 4P", cil:"1.8", tr:"Mecánica", k:"LANDIRENZO", c:"GYGLPBS5780314", t:"PASAJEROS"},
+        {d:"15/04/2014", m:"Geely", mod:"EC7 1.8 DOHC Sedan 4P", cil:"1.8", tr:"Automática", k:"LANDIRENZO", c:"GYGLPBS5780314", t:"PASAJEROS"},
+        {d:"01/05/2014", m:"Hyundai", mod:"Accent RB 1.4 Sedán 4P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"HYGLPBS5840414", t:"PASAJEROS"},
+        {d:"01/05/2014", m:"Hyundai", mod:"Accent RB 1.4 Hatchback 5P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"HYGLPBS5840414", t:"HATCHBACK"},
+        {d:"01/05/2014", m:"Hyundai", mod:"Accent RB 1.4 Hatchback 5P", cil:"1.4", tr:"Automática", k:"LANDIRENZO", c:"HYGLPBS5840414", t:"HATCHBACK"},
+        {d:"16/05/2014", m:"Volkswagen", mod:"Voyage 1.6 SOHC Sedan 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"VWGLPBS5850414", t:"PASAJEROS"},
+        {d:"19/01/2015", m:"DFM", mod:"S30 1.6 DOHC Sedan 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"DFGLPBS6991214", t:"PASAJEROS"},
+        {d:"19/01/2015", m:"Toyota", mod:"Corolla 1.8 DOHC Sedán 4P", cil:"1.8", tr:"Mecánica", k:"LANDIRENZO", c:"TYGLPBS6691014", t:"PASAJEROS"},
+        {d:"19/01/2015", m:"Toyota", mod:"Corolla 1.8 DOHC Sedán 4P", cil:"1.8", tr:"Automática", k:"LANDIRENZO", c:"TYGLPBS6691014", t:"PASAJEROS"},
+        {d:"06/05/2015", m:"MAZDA", mod:"3 1.6 DOHC Sedán 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"MZGLPBS7100315", t:"PASAJEROS"},
+        {d:"24/06/2015", m:"Renault", mod:"Symbol 1.6 SOHC Sedan 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"RNGLPBS7230415", t:"PASAJEROS"},
+        {d:"14/12/2015", m:"Nissan", mod:"Sentra 1.8 Sedan 4P", cil:"1.8", tr:"Automática", k:"LANDIRENZO", c:"NSGLPBS7991115", t:"PASAJEROS"},
+        {d:"20/12/2016", m:"Chevrolet", mod:"Sail 1.4 Sedan 4P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPBS8551116", t:"PASAJEROS"},
+        {d:"28/12/2016", m:"Nissan", mod:"Sentra 1.8 Sedan 4P", cil:"1.8", tr:"Mecánica", k:"LANDIRENZO", c:"NSGLPBS8531116", t:"PASAJEROS"},
+        {d:"16/06/2017", m:"DFM", mod:"A30 1.6 Sedan 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"DFGLPGM8710517", t:"PASAJEROS"},
+        {d:"21/03/2018", m:"Kia", mod:"Rio 4 1.4 Sedan 4P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM9300218", t:"PASAJEROS"},
+        {d:"21/03/2018", m:"Kia", mod:"Rio 4 1.4 Sedan 4P", cil:"1.4", tr:"Automática", k:"LANDIRENZO", c:"KIGLPGM9300218", t:"PASAJEROS"},
+        {d:"21/03/2018", m:"Kia", mod:"Rio 3 1.4 Hatchback", cil:"1.4", tr:"Automática", k:"LANDIRENZO", c:"KIGLPGM9300218", t:"HATCHBACK"},
+        {d:"21/03/2018", m:"Kia", mod:"Rio 3 1.4 Hatchback", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM9300218", t:"HATCHBACK"},
+        {d:"21/03/2018", m:"Kia", mod:"Rio 5 1.4 Hatchback 5P", cil:"1.4", tr:"Automática", k:"LANDIRENZO", c:"KIGLPGM9300218", t:"HATCHBACK"},
+        {d:"21/03/2018", m:"Kia", mod:"Rio 5 1.4 Hatchback 5P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM9300218", t:"HATCHBACK"},
+        {d:"30/07/2020", m:"Chevrolet", mod:"Sail 1.5 Sedan 4P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM10400720", t:"PASAJEROS"},
+        {d:"30/07/2020", m:"Chevrolet", mod:"Sail 1.5 Sedan 4P", cil:"1.5", tr:"Automática", k:"LANDIRENZO", c:"CHGLPGM10400720", t:"PASAJEROS"},
+        {d:"31/07/2020", m:"Hyundai", mod:"Verna 1.4 Sedan 4P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"HYGLPGM10390720", t:"PASAJEROS"},
+        {d:"11/08/2020", m:"Chevrolet", mod:"Tracker FWD 1.8 Station Wagon 4X2", cil:"1.8", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM10420820", t:"SUV"},
+        {d:"11/08/2020", m:"Chevrolet", mod:"Tracker AWD 1.8 Station Wagon 4X4", cil:"1.8", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM10420820", t:"SUV"},
+        {d:"11/08/2020", m:"Chevrolet", mod:"Tracker AWD 1.8 DOHC Station Wagon 4X4", cil:"1.8", tr:"Automática", k:"LANDIRENZO", c:"CHGLPGM10420820", t:"SUV"},
+        {d:"11/08/2020", m:"Chevrolet", mod:"Tracker FWD 1.8 DOHC Station Wagon 4X2", cil:"1.8", tr:"Automática", k:"LANDIRENZO", c:"CHGLPGM10420820", t:"SUV"},
+        {d:"11/08/2020", m:"Chevrolet", mod:"Tracker FWD 1.8 DOHC Station Wagon 4X2", cil:"1.8", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM10420820", t:"SUV"},
+        {d:"11/08/2020", m:"Chevrolet", mod:"Tracker AWD 1.8 DOHC Station Wagon 4X4", cil:"1.8", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM10420820", t:"SUV"},
+        {d:"20/08/2020", m:"JAC", mod:"Grand S3 1.6 Hatchback 5P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"JCGLPGM10430820", t:"HATCHBACK"},
+        {d:"24/08/2020", m:"GREAT WALL", mod:"C30 1.5 Sedan 4P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"GWGLPGM10440820", t:"PASAJEROS"},
+        {d:"15/09/2020", m:"GREAT WALL", mod:"M4 1.5 Hatchback 5P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"GWGLPGM10480920", t:"HATCHBACK"},
+        {d:"28/09/2020", m:"UAZ", mod:"Hunter 2.7 SW Tipo Jeep 4X4", cil:"2.7", tr:"Mecánica", k:"LANDIRENZO", c:"UZGLPGM10530920", t:"JEEP"},
+        {d:"06/10/2020", m:"JAC", mod:"S2 1.5 Hatchback 5P 4x2", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"JCGLPGM10580920", t:"HATCHBACK"},
+        {d:"09/10/2020", m:"Chevrolet", mod:"Cavalier 1.5 Sedan 4P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM10540920", t:"PASAJEROS"},
+        {d:"09/10/2020", m:"Chevrolet", mod:"Cavalier 1.5 Sedan 4P", cil:"1.5", tr:"Automática", k:"LANDIRENZO", c:"CHGLPGM10540920", t:"PASAJEROS"},
+        {d:"22/10/2020", m:"Volkswagen", mod:"Virtus 1.6 Sedan 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"VWGLPGM10621020", t:"PASAJEROS"},
+        {d:"22/10/2020", m:"Volkswagen", mod:"Virtus 1.6 Sedan 4P", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"VWGLPGM10621020", t:"PASAJEROS"},
+        {d:"23/11/2020", m:"Changan", mod:"CS35 1.6 Station Wagon 5P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"CNGLPGM10801120", t:"SUV"},
+        {d:"23/11/2020", m:"Changan", mod:"CS35 1.6 Station Wagon 5P", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"CNGLPGM10801120", t:"SUV"},
+        {d:"23/11/2020", m:"Changan", mod:"CS35 1.6 DOHC Station Wagon 5P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"CNGLPGM10801120", t:"SUV"},
+        {d:"23/11/2020", m:"Changan", mod:"CS35 1.6 DOHC Station Wagon 5P", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"CNGLPGM10801120", t:"SUV"},
+        {d:"23/11/2020", m:"Changan", mod:"CS35 Plus 1.6 Station Wagon 5P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"CNGLPGM10801120", t:"SUV"},
+        {d:"23/11/2020", m:"Changan", mod:"CS35 Plus 1.6 Station Wagon 5P", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"CNGLPGM10801120", t:"SUV"},
+        {d:"25/11/2020", m:"Changan", mod:"CS15 1.5 Hatchback", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CNGLPGM10791120", t:"HATCHBACK"},
+        {d:"25/11/2020", m:"Changan", mod:"CS15 1.5 Hatchback", cil:"1.5", tr:"Automática", k:"LANDIRENZO", c:"CNGLPGM10791120", t:"HATCHBACK"},
+        {d:"30/11/2020", m:"Chery", mod:"Arrizo 7 1.5 DOHC Sedan 4P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CYGLPGM10751120", t:"PASAJEROS"},
+        {d:"21/12/2020", m:"Subaru", mod:"XV 1.6 CVT Station Wagon 4X4", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"SBGLPGM10851120", t:"SUV"},
+        {d:"21/12/2020", m:"Subaru", mod:"XV 1.6 DOHC Station Wagon 4X4", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"SBGLPGM10851120", t:"SUV"},
+        {d:"21/12/2020", m:"Suzuki", mod:"Swift 1.2 DOHC Hatchback 5P", cil:"1.2", tr:"Mecánica", k:"LANDIRENZO", c:"SZGLPGM10731120", t:"HATCHBACK"},
+        {d:"21/12/2020", m:"Suzuki", mod:"Swift 1.2 Hatchback 5P", cil:"1.2", tr:"Automática", k:"LANDIRENZO", c:"SZGLPGM10731120", t:"HATCHBACK"},
+        {d:"21/12/2020", m:"Suzuki", mod:"Swift Dzire 1.2 DOHC Sedan 4P", cil:"1.2", tr:"Mecánica", k:"LANDIRENZO", c:"SZGLPGM10731120", t:"PASAJEROS"},
+        {d:"21/12/2020", m:"Suzuki", mod:"Swift Dzire 1.2 Sedan 4P", cil:"1.2", tr:"Automática", k:"LANDIRENZO", c:"SZGLPGM10731120", t:"PASAJEROS"},
+        {d:"07/01/2021", m:"Chery", mod:"Tiggo 2 1.5 Station Wagon 5P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CYGLPGM10941220", t:"SUV"},
+        {d:"07/01/2021", m:"Chery", mod:"Tiggo 2 1.5 Station Wagon 5P", cil:"1.5", tr:"Automática", k:"LANDIRENZO", c:"CYGLPGM10941220", t:"SUV"},
+        {d:"07/01/2021", m:"Chery", mod:"Arrizo 5 1.5 Sedan 4P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CYGLPGM10941220", t:"PASAJEROS"},
+        {d:"07/01/2021", m:"Chery", mod:"Arrizo 5 1.5 Sedan 4P", cil:"1.5", tr:"Automática", k:"LANDIRENZO", c:"CYGLPGM10941220", t:"PASAJEROS"},
+        {d:"25/01/2021", m:"Volkswagen", mod:"T-Cross 1.6 Station Wagon 5P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"VWGLPGM10950121", t:"SUV"},
+        {d:"25/01/2021", m:"Volkswagen", mod:"T-Cross 1.6 Station Wagon 5P", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"VWGLPGM10950121", t:"SUV"},
+        {d:"13/09/2021", m:"UAZ", mod:"Kasak (Patriot) 2.7", cil:"2.7", tr:"Automática", k:"LANDIRENZO", c:"UZGLPGM11650821", t:"SUV"},
+        {d:"13/09/2021", m:"UAZ", mod:"Kasak MT 2.7", cil:"2.7", tr:"Mecánica", k:"LANDIRENZO", c:"UZGLPGM11650821", t:"SUV"},
+        {d:"18/11/2021", m:"FIAT", mod:"Qubo Dynamic 1.4 Hatchback 4P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"FTGLPGM12011021", t:"PASAJEROS"},
+        {d:"18/11/2021", m:"FIAT", mod:"Qubo Active 1.4 Hatchback 4P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"FTGLPGM12011021", t:"PASAJEROS"},
+        {d:"04/03/2022", m:"Honda", mod:"HR-V LXS 1.8 Station Wagon 5P", cil:"1.8", tr:"Automática", k:"LANDIRENZO", c:"HNGLPGM12500522", t:"SUV"},
+        {d:"04/03/2022", m:"Honda", mod:"HR-V EXS 1.8 Station Wagon 5P", cil:"1.8", tr:"Automática", k:"LANDIRENZO", c:"HNGLPGM12500522", t:"SUV"},
+        {d:"22/03/2022", m:"MG", mod:"ZX 1.5 MT", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"MGGLPGM12270322", t:"SUV"},
+        {d:"22/03/2022", m:"MG", mod:"ZX 1.5 CVT", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"MGGLPGM12270322", t:"SUV"},
+        {d:"25/10/2023", m:"Changan", mod:"Alsvin 1.4 4P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"CNGLPGM13281023", t:"PASAJEROS"},
+        {d:"13/12/2023", m:"Ssangyong", mod:"Tivoli LX 1.6 2WD 5P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"SSGLPGM13341223", t:"SUV"},
+        {d:"01/07/2024", m:"KIA", mod:"Soluto 1.4 MPI Sedán", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM13730624", t:"PASAJEROS"},
+        {d:"03/10/2024", m:"KIA", mod:"K3 EX 1.6 Sedán", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM13770924", t:"PASAJEROS"},
+        {d:"08/01/2025", m:"Chery", mod:"Tiggo 2 GLS MT", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CYGLPGM10941220", t:"SUV"},
+        {d:"08/01/2025", m:"Chery", mod:"Tiggo 2 GL MT", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CYGLPGM10941220", t:"SUV"},
+        {d:"08/01/2025", m:"Chery", mod:"Tiggo 2 GL MT PRO", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CYGLPGM10941220", t:"SUV"},
+        {d:"08/01/2025", m:"Chery", mod:"Tiggo 2 GLS MT PRO", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CYGLPGM10941220", t:"SUV"},
+        {d:"08/01/2025", m:"Chery", mod:"Tiggo 2 GLX MT PRO", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CYGLPGM10941220", t:"SUV"},
+        {d:"08/01/2025", m:"Chery", mod:"Tiggo 2 GLS CVT", cil:"1.5", tr:"Automática", k:"LANDIRENZO", c:"CYGLPGM10941220", t:"SUV"},
+        {d:"08/01/2025", m:"Chery", mod:"Tiggo 2 GLS CVT PRO", cil:"1.5", tr:"Automática", k:"LANDIRENZO", c:"CYGLPGM10941220", t:"SUV"},
+        {d:"08/01/2025", m:"Chery", mod:"K60 MT", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CYGLPGM10941220", t:"SUV"},
+        {d:"08/01/2025", m:"Chery", mod:"Arrizo 3 1.5 Sedán 4P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CYGLPGM10941220", t:"SUV"},
+        {d:"11/09/2025", m:"Chevrolet", mod:"Grove 1.5 Station Wagon", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM10400720", t:"PASAJEROS"},
+        {d:"11/09/2025", m:"Chevrolet", mod:"Grove 1.5 Station Wagon CVT", cil:"1.5", tr:"Automática", k:"LANDIRENZO", c:"CHGLPGM10400720", t:"PASAJEROS"},
+        {d:"24/10/2025", m:"Nissan", mod:"Kicks (P15) 1.6 CVT", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"NSGLPBS4650712", t:"PASAJEROS"},
+        {d:"24/10/2025", m:"Nissan", mod:"Kicks (P15) 1.6 MT", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"NSGLPBS4650712", t:"PASAJEROS"},
+        {d:"28/10/2025", m:"Changan", mod:"Alsvin 1.5 4P", cil:"1.5", tr:"Automática", k:"LANDIRENZO", c:"CNGLPGM10791120", t:"HATCHBACK"},
+        {d:"03/12/2025", m:"KIA", mod:"Seltos 1.6 MPI 6MT SW", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM13770924", t:"OK"},
+        {d:"03/12/2025", m:"KIA", mod:"Seltos 1.6 MPI 6AT SW", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"KIGLPGM13770924", t:"OK"},
+        {d:"03/12/2025", m:"Hyundai", mod:"Creta GS 1.6 SW 5P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM13770924", t:"OK"},
+        {d:"03/12/2025", m:"Hyundai", mod:"Creta GS PE 1.6 SW 5P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM13770924", t:"OK"},
+        {d:"03/12/2025", m:"Hyundai", mod:"Creta GS 1.6 SW 5P", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"KIGLPGM13770924", t:"OK"},
+        {d:"03/12/2025", m:"Hyundai", mod:"Creta GS PE 1.6 SW 5P", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"KIGLPGM13770924", t:"OK"},
+        {d:"03/12/2025", m:"Hyundai", mod:"Venue QX MT", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM13770924", t:"OK"},
+        {d:"04/12/2025", m:"MG", mod:"ZS 1.5 MT Station Wagon", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"MGGLPGM12270322", t:"OK"},
+        {d:"31/05/2013", m:"Volkswagen", mod:"Saveiro 1.6 Pick Up 2P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"VWGLPBS5270413", t:"COMERCIAL"},
+        {d:"26/02/2015", m:"Chevrolet", mod:"N300 Max 1.2 Furgón 5P", cil:"1.2", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPBS6981214", t:"COMERCIAL"},
+        {d:"20/07/2015", m:"Gac Gonow", mod:"Way Cargo 1.0 Furgón 5P", cil:"1.0", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7220415", t:"COMERCIAL"},
+        {d:"20/07/2015", m:"Gac Gonow", mod:"Way 1.3 Camioneta 4P", cil:"1.3", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7240415", t:"COMERCIAL"},
+        {d:"28/07/2015", m:"Gac Gonow", mod:"Way 1.0 Camioneta 2P", cil:"1.0", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7220415", t:"COMERCIAL"},
+        {d:"28/07/2015", m:"Gac Gonow", mod:"Way 1.0 Camioneta 4P", cil:"1.0", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7220415", t:"COMERCIAL"},
+        {d:"28/07/2015", m:"Gac Gonow", mod:"Way Cargo Box 1.0 Camioneta 2P", cil:"1.0", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7220415", t:"COMERCIAL"},
+        {d:"28/07/2015", m:"Gac Gonow", mod:"Way 1.3 Camioneta 2P", cil:"1.3", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7240415", t:"COMERCIAL"},
+        {d:"28/07/2015", m:"Gac Gonow", mod:"Way 1.3 Furgón 5P", cil:"1.3", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7240415", t:"COMERCIAL"},
+        {d:"28/07/2015", m:"Gac Gonow", mod:"Way Cargo Box Frio 1.3", cil:"1.3", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7240415", t:"COMERCIAL"},
+        {d:"28/07/2015", m:"Gac Gonow", mod:"Way Cargo Box 1.3", cil:"1.3", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7240415", t:"COMERCIAL"},
+        {d:"26/01/2017", m:"Foton", mod:"Midi Truck 1.3 Pick-up 2P", cil:"1.3", tr:"Mecánica", k:"LANDIRENZO", c:"FNGLPBS8590117", t:"COMERCIAL"},
+        {d:"26/01/2017", m:"Foton", mod:"Midi doble cabina 1.3 Pick-up 4P", cil:"1.3", tr:"Mecánica", k:"LANDIRENZO", c:"FNGLPBS8590117", t:"COMERCIAL"},
+        {d:"16/02/2017", m:"Fiat", mod:"Strada 1.6 Pick-up 2P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"FTGLPPBS8620117", t:"COMERCIAL"},
+        {d:"09/06/2017", m:"Foton", mod:"K1 Cargo 2.0 Furgon", cil:"2.0", tr:"Mecánica", k:"LANDIRENZO", c:"FNGLPGM8720517", t:"COMERCIAL"},
+        {d:"09/09/2020", m:"Chevrolet", mod:"Spin 1.8 Sedan wagon 7P", cil:"1.8", tr:"Automática", k:"LANDIRENZO", c:"CHGLPGM10490920", t:"COMERCIAL"},
+        {d:"09/09/2020", m:"Chevrolet", mod:"Spin 1.8 Sedan wagon 7P", cil:"1.8", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM10490920", t:"COMERCIAL"},
+        {d:"09/09/2020", m:"Chevrolet", mod:"Spin Activ 1.8 Station Wagon 7P", cil:"1.8", tr:"Automática", k:"LANDIRENZO", c:"CHGLPGM10490920", t:"COMERCIAL"},
+        {d:"09/09/2020", m:"Chevrolet", mod:"Spin Activ 1.8 Station Wagon 7P", cil:"1.8", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM10490920", t:"COMERCIAL"},
+        {d:"30/11/2020", m:"Suzuki", mod:"Grand Nomade 2.4 SW 4WD", cil:"2.4", tr:"Mecánica", k:"LANDIRENZO", c:"SZGLPGM10861120", t:"CAMIONETA"},
+        {d:"30/11/2020", m:"Suzuki", mod:"Grand Nomade 2.4 SW 4WD", cil:"2.4", tr:"Automática", k:"LANDIRENZO", c:"SZGLPGM10861120", t:"CAMIONETA"},
+        {d:"30/11/2020", m:"Suzuki", mod:"Grand Nomade 2.4 SW 2WD", cil:"2.4", tr:"Mecánica", k:"LANDIRENZO", c:"SZGLPGM10861120", t:"CAMIONETA"},
+        {d:"30/11/2020", m:"Suzuki", mod:"Grand Nomade 2.4 SW 2WD", cil:"2.4", tr:"Automática", k:"LANDIRENZO", c:"SZGLPGM10861120", t:"CAMIONETA"},
         {d:"24/12/2020", m:"UAZ", mod:"220695-04 Bukhanka", cil:"2.7", tr:"Mecánica", k:"LANDIRENZO", c:"UZGLPGM10570920", t:"COMERCIAL"},
         {d:"24/12/2020", m:"UAZ", mod:"374195 Bukhanka", cil:"2.7", tr:"Mecánica", k:"LANDIRENZO", c:"UZGLPGM10570920", t:"COMERCIAL"},
         {d:"24/12/2020", m:"UAZ", mod:"390995 Bukhanka", cil:"2.7", tr:"Mecánica", k:"LANDIRENZO", c:"UZGLPGM10570920", t:"COMERCIAL"},
         {d:"24/12/2020", m:"UAZ", mod:"390945 Bukhanka", cil:"2.7", tr:"Mecánica", k:"LANDIRENZO", c:"UZGLPGM10570920", t:"COMERCIAL"},
         {d:"24/12/2020", m:"UAZ", mod:"330365 Bukhanka", cil:"2.7", tr:"Mecánica", k:"LANDIRENZO", c:"UZGLPGM10570920", t:"COMERCIAL"},
-        {d:"07/01/2021", m:"Chery", mod:"Arrizo 5 1.5 Lts. Sedan 4P 4x2", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CYGLPGM10941220", t:"PASAJEROS"},
-        {d:"07/01/2021", m:"Chery", mod:"Arrizo 5 1.5 Lts. Sedan 4P 4x2", cil:"1.5", tr:"Automática", k:"LANDIRENZO", c:"CYGLPGM10941220", t:"PASAJEROS"},
-        {d:"25/01/2021", m:"Volkswagen", mod:"T-Cross 1.6 Lts Station Wagon 5P 4X2", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"VWGLPGM10950121", t:"SUV"},
-        {d:"25/01/2021", m:"Volkswagen", mod:"T-Cross 1.6 Lts Station Wagon 5P 4X2", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"VWGLPGM10950121", t:"SUV"},
         {d:"25/03/2021", m:"Ram", mod:"700 laramie CD 1.3 Camioneta 4P", cil:"1.3", tr:"Mecánica", k:"LANDIRENZO", c:"RMGLPGM11210321", t:"CAMIONETA"},
-        {d:"18/05/2021", m:"DFSK", mod:"Cargo Van C35 1.5 Lts Furgon 5P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"DSGLPGM11280521", t:"CAMIONETA"},
-        {d:"18/05/2021", m:"DFSK", mod:"Truck SC Serie C 1.5 Lts Camioneta 2P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"DSGLPGM11280521", t:"CAMIONETA"},
-        {d:"18/05/2021", m:"DFSK", mod:"Truck DC Serie C 1.5 Lts Camioneta 4P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"DSGLPGM11280521", t:"CAMIONETA"},
-        {d:"18/05/2021", m:"DFSK", mod:"Cargo Box Serie C 1.5 Lts Camioneta 2P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"DSGLPGM11280521", t:"CAMIONETA"},
-        {d:"18/05/2021", m:"DFSK", mod:"Cargo Box Serie C 1.5 Lts Camioneta 4P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"DSGLPGM11280521", t:"CAMIONETA"},
-        {d:"18/05/2021", m:"DFSK", mod:"Refritruck Serie C 1.5 Lts Camioneta 2P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"DSGLPGM11280521", t:"CAMIONETA"},
-        {d:"09/09/2021", m:"KYC", mod:"X5 1.5 Cargo Box 1.5 Lts Furgon 2P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"KYGLPGM11370621", t:"COMERCIAL"},
-        {d:"09/09/2021", m:"KYC", mod:"X5 1.5 Pick-Up 1.5 Lts Camioneta 2P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"KYGLPGM11370621", t:"CAMIONETA"},
-        {d:"09/09/2021", m:"KYC", mod:"T3 Cargo Box 1.5 Lts Camioneta 2P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"KYGLPGM11370621", t:"CAMIONETA"},
-        {d:"09/09/2021", m:"KYC", mod:"T3 Pick-Up 1.5 Lts Camioneta 2P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"KYGLPGM11370621", t:"CAMIONETA"},
-        {d:"09/09/2021", m:"KYC", mod:"T3 D/C Pick-Up 1.5 Lts Camioneta 2P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"KYGLPGM11370621", t:"CAMIONETA"},
-        {d:"13/09/2021", m:"UAZ", mod:"Kasak (Patriot) 2.7 Lts.", cil:"2.7", tr:"Automática", k:"LANDIRENZO", c:"UZGLPGM11650821", t:"SUV"},
-        {d:"13/09/2021", m:"UAZ", mod:"Kasak MT 2.7 Lts.", cil:"2.7", tr:"Mecánica", k:"LANDIRENZO", c:"UZGLPGM11650821", t:"SUV"},
-        {d:"18/11/2021", m:"FIAT", mod:"Qubo Dynamic 1.4 (300 5PB) Hatchback 4P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"FTGLPGM12011021", t:"PASAJEROS"},
-        {d:"18/11/2021", m:"FIAT", mod:"Qubo Active 1.4 (300 4PB) Hatchback 4P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"FTGLPGM12011021", t:"PASAJEROS"},
+        {d:"18/05/2021", m:"DFSK", mod:"Cargo Van C35 1.5 Furgon 5P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"DSGLPGM11280521", t:"CAMIONETA"},
+        {d:"18/05/2021", m:"DFSK", mod:"Truck SC Serie C 1.5 Camioneta 2P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"DSGLPGM11280521", t:"CAMIONETA"},
+        {d:"18/05/2021", m:"DFSK", mod:"Truck DC Serie C 1.5 Camioneta 4P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"DSGLPGM11280521", t:"CAMIONETA"},
+        {d:"18/05/2021", m:"DFSK", mod:"Cargo Box Serie C 1.5 Camioneta 2P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"DSGLPGM11280521", t:"CAMIONETA"},
+        {d:"18/05/2021", m:"DFSK", mod:"Cargo Box Serie C 1.5 Camioneta 4P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"DSGLPGM11280521", t:"CAMIONETA"},
+        {d:"18/05/2021", m:"DFSK", mod:"Refritruck Serie C 1.5 Camioneta 2P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"DSGLPGM11280521", t:"CAMIONETA"},
+        {d:"09/09/2021", m:"KYC", mod:"X5 1.5 Cargo Box 1.5 Furgon 2P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"KYGLPGM11370621", t:"COMERCIAL"},
+        {d:"09/09/2021", m:"KYC", mod:"X5 1.5 Pick-Up 1.5 Camioneta 2P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"KYGLPGM11370621", t:"CAMIONETA"},
+        {d:"09/09/2021", m:"KYC", mod:"T3 Cargo Box 1.5 Camioneta 2P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"KYGLPGM11370621", t:"CAMIONETA"},
+        {d:"09/09/2021", m:"KYC", mod:"T3 Pick-Up 1.5 Camioneta 2P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"KYGLPGM11370621", t:"CAMIONETA"},
+        {d:"09/09/2021", m:"KYC", mod:"T3 D/C Pick-Up 1.5 Camioneta 2P", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"KYGLPGM11370621", t:"CAMIONETA"},
         {d:"01/02/2022", m:"Renault", mod:"Oroch 1.6 Pick Up 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"RNGLPGM12180122", t:"CAMIONETA"},
-        {d:"04/03/2022", m:"GREAT WALL", mod:"Wingle 7 2.4 Lts. Pick Up 4P", cil:"2.0", tr:"Mecánica", k:"LANDIRENZO", c:"GWGLPGM12250222", t:"CAMIONETA"},
-        {d:"04/03/2022", m:"Honda", mod:"HR -V LXS 1.8 Lts Station Wagon 5P", cil:"1.8", tr:"Automática", k:"LANDIRENZO", c:"HNGLPGM12500522", t:"SUV"},
-        {d:"04/03/2022", m:"Honda", mod:"HR -V EXS 1.8 Lts Station Wagon 5P", cil:"1.8", tr:"Automática", k:"LANDIRENZO", c:"HNGLPGM12500522", t:"SUV"},
-        {d:"22/03/2022", m:"MG", mod:"ZX 1.5 Lts MT", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"MGGLPGM12270322", t:"SUV"},
-        {d:"22/03/2022", m:"MG", mod:"ZX 1.5 Lts CVT", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"MGGLPGM12270322", t:"SUV"},
-        {d:"25/10/2023", m:"Changan", mod:"Alsvin 1,4 Lts 4P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"CNGLPGM13281023", t:"PASAJEROS"},
-        {d:"13/12/2023", m:"Ssangyong", mod:"Tivoli LX 1,6 Lts., 6MT 2WD 5P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"SSGLPGM13341223", t:"SUV"},
-        {d:"03/05/2024", m:"Foton", mod:"TM3 Cargobox 1,6 Lts., 4x2 Camioneta 2P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"FNGLPGM13600424", t:"COMERCIAL"},
-        {d:"17/05/2024", m:"RAM", mod:"700 SLT CS 1,4 Lts., 4x2 Camioneta 2P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"RMGLPGM13610524", t:"CAMIONETA"},
-        {d:"01/07/2024", m:"KIA", mod:"Soluto 1,4 Lts., MPI 5MT Sedán", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM13730624", t:"PASAJEROS"},
-        {d:"03/10/2024", m:"KIA", mod:"K3 EX 1.6 LTS Sedán", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM13770924", t:"PASAJEROS"},
-        {d:"11/09/2025", m:"Chevrolet", mod:"Grove 1,5 Lts., Station Wagon", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM10400720", t:"PASAJEROS"},
-        {d:"11/09/2025", m:"Chevrolet", mod:"Grove 1,5 Lts., Station Wagon", cil:"1.5", tr:"Automática", k:"LANDIRENZO", c:"CHGLPGM10400720", t:"PASAJEROS"},
-        {d:"24/10/2025", m:"Nissan", mod:"Kicks (P15) 1,6 Lts. CVT", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"NSGLPBS4650712", t:"PASAJEROS"},
-        {d:"24/10/2025", m:"Nissan", mod:"Kicks (P15) 1,6 Lts. MT", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"NSGLPBS4650712", t:"PASAJEROS"},
-        {d:"28/10/2025", m:"Changan", mod:"Alsvin 1,5 Lts 4P", cil:"1.5", tr:"Automática", k:"LANDIRENZO", c:"CNGLPGM10791120", t:"HATCHBACK"},
-        {d:"03/12/2025", m:"KIA", mod:"Seltos 1.6 MPI 6MT Station Wagon", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM13770924", t:"OK"},
-        {d:"03/12/2025", m:"KIA", mod:"Seltos 1.6 MPI 6AT Station Wagon", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"KIGLPGM13770924", t:"OK"},
-        {d:"03/12/2025", m:"Hyundai", mod:"Creta GS 1,6 Lts. Station Wagon 5P.", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM13770924", t:"OK"},
-        {d:"03/12/2025", m:"Hyundai", mod:"Creta GS PE 1,6 Lts. Station Wagon 5P.", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM13770924", t:"OK"},
-        {d:"03/12/2025", m:"Hyundai", mod:"Creta GS 1,6 Lts. Station Wagon 5P.", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"KIGLPGM13770924", t:"OK"},
-        {d:"03/12/2025", m:"Hyundai", mod:"Creta GS PE 1,6 Lts. Station Wagon 5P.", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"KIGLPGM13770924", t:"OK"},
-        {d:"03/12/2025", m:"Hyundai", mod:"Venue QX MT", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM13770924", t:"OK"},
-        {d:"04/12/2025", m:"MG", mod:"ZS 1.5L MT Station Wagon", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"MGGLPGM12270322", t:"OK"},
+        {d:"04/03/2022", m:"GREAT WALL", mod:"Wingle 7 2.0 Pick Up 4P", cil:"2.0", tr:"Mecánica", k:"LANDIRENZO", c:"GWGLPGM12250222", t:"CAMIONETA"},
+        {d:"03/05/2024", m:"Foton", mod:"TM3 Cargobox 1.6 Camioneta 2P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"FNGLPGM13600424", t:"COMERCIAL"},
+        {d:"17/05/2024", m:"RAM", mod:"700 SLT CS 1.4 Camioneta 2P", cil:"1.4", tr:"Mecánica", k:"LANDIRENZO", c:"RMGLPGM13610524", t:"CAMIONETA"},
 
-        // --- KIT PRINS (ALTA GAMA / INYECCIÓN DIRECTA) ---
-        {d:"25/09/2019", m:"CHEVROLET", mod:"Silverado 5.3 Lts (2015-2019)", cil:"5.3", tr:"Automática", k:"PRINS", c:"CHGLPGM10090819", t:"ALTA GAMA"},
-        {d:"25/09/2019", m:"CHEVROLET", mod:"silverado 5.3 Lts c/simple (2015-2019)", cil:"5.3", tr:"Automática", k:"PRINS", c:"CHGLPGM10090819", t:"ALTA GAMA"},
-        {d:"25/09/2019", m:"FORD", mod:"F-150 Platinum 3.5 Lts (2016-2020)", cil:"3.5", tr:"Automática", k:"PRINS", c:"FRGLPGM10140819", t:"ALTA GAMA"},
-        {d:"26/09/2019", m:"FORD", mod:"F-150 5.0 Lts (2018-2019)", cil:"5.0", tr:"Automática", k:"PRINS", c:"FRGLPGM10100819", t:"ALTA GAMA"},
-        {d:"14/05/2020", m:"RAM", mod:"1500 5.7 LTS (2017-2021)", cil:"5.7", tr:"Automática", k:"PRINS", c:"RMGLPGM10330120", t:"ALTA GAMA"},
-        {d:"03/11/2020", m:"FORD", mod:"F150 XLT 3.3 Lts Pick up 2P 4X4 (2018-19)", cil:"3.3", tr:"Automática", k:"PRINS", c:"FRGLPGM10500920", t:"ALTA GAMA"},
-        {d:"03/11/2020", m:"FORD", mod:"F150 XLT 3.3 Lts Pick up 4P 4X2 (2018-19)", cil:"3.3", tr:"Automática", k:"PRINS", c:"FRGLPGM10500920", t:"ALTA GAMA"},
-        {d:"11/12/2020", m:"FORD", mod:"F150 Raptor 3.5 Lts camioneta 4P (2017-20)", cil:"3.5", tr:"Automática", k:"PRINS", c:"FRGLPGM10871120", t:"ALTA GAMA"},
-        {d:"11/12/2020", m:"FORD", mod:"F150 Raptor 3.5 Lts camioneta D/Cab 4P (2017-20)", cil:"3.5", tr:"Automática", k:"PRINS", c:"FRGLPGM10871120", t:"ALTA GAMA"}
+        // --- PRINS ---
+        {d:"25/09/2019", m:"CHEVROLET", mod:"Silverado 5.3 (2015-2019)", cil:"5.3", tr:"Automática", k:"PRINS", c:"CHGLPGM10090819", t:"ALTA GAMA"},
+        {d:"25/09/2019", m:"CHEVROLET", mod:"Silverado 5.3 c/simple (2015-2019)", cil:"5.3", tr:"Automática", k:"PRINS", c:"CHGLPGM10090819", t:"ALTA GAMA"},
+        {d:"25/09/2019", m:"FORD", mod:"F-150 Platinum 3.5 (2016-2020)", cil:"3.5", tr:"Automática", k:"PRINS", c:"FRGLPGM10140819", t:"ALTA GAMA"},
+        {d:"26/09/2019", m:"FORD", mod:"F-150 5.0 (2018-2019)", cil:"5.0", tr:"Automática", k:"PRINS", c:"FRGLPGM10100819", t:"ALTA GAMA"},
+        {d:"14/05/2020", m:"RAM", mod:"1500 5.7 (2017-2021)", cil:"5.7", tr:"Automática", k:"PRINS", c:"RMGLPGM10330120", t:"ALTA GAMA"},
+        {d:"03/11/2020", m:"FORD", mod:"F150 XLT 3.3 Pick up 2P 4X4 (18-19)", cil:"3.3", tr:"Automática", k:"PRINS", c:"FRGLPGM10500920", t:"ALTA GAMA"},
+        {d:"03/11/2020", m:"FORD", mod:"F150 XLT 3.3 Pick up 4P 4X2 (18-19)", cil:"3.3", tr:"Automática", k:"PRINS", c:"FRGLPGM10500920", t:"ALTA GAMA"},
+        {d:"11/12/2020", m:"FORD", mod:"F150 Raptor 3.5 camioneta 4P (17-20)", cil:"3.5", tr:"Automática", k:"PRINS", c:"FRGLPGM10871120", t:"ALTA GAMA"},
+        {d:"11/12/2020", m:"FORD", mod:"F150 Raptor 3.5 camioneta D/Cab (17-20)", cil:"3.5", tr:"Automática", k:"PRINS", c:"FRGLPGM10871120", t:"ALTA GAMA"},
+
+        // --- VIALLE (INYECCIÓN LÍQUIDA) - CORREGIDO ---
+        {d:"29/06/2017", m:"Hyundai", mod:"Accent 1.6 Sedan 4P", cil:"1.6", tr:"Mecánica", k:"VIALLE", c:"HYGLPGM8760617", t:"PASAJEROS"},
+        {d:"29/06/2017", m:"Hyundai", mod:"Accent 1.6 Sedan 4P", cil:"1.6", tr:"Automática", k:"VIALLE", c:"HYGLPGM8760617", t:"PASAJEROS"},
+        {d:"29/06/2017", m:"Hyundai", mod:"Accent RB 1.6 Hatchback 5P", cil:"1.6", tr:"Mecánica", k:"VIALLE", c:"HYGLPGM8760617", t:"HATCHBACK"},
+        {d:"29/06/2017", m:"Hyundai", mod:"Accent RB 1.6 Hatchback 5P", cil:"1.6", tr:"Automática", k:"VIALLE", c:"HYGLPGM8760617", t:"HATCHBACK"},
+        {d:"10/07/2017", m:"Hyundai", mod:"Elantra 1.6 Sedan 4P", cil:"1.6", tr:"Mecánica", k:"VIALLE", c:"HYGLPGM8750617", t:"PASAJEROS"},
+        {d:"10/07/2017", m:"Hyundai", mod:"Elantra 1.6 Sedan 4P", cil:"1.6", tr:"Automática", k:"VIALLE", c:"HYGLPGM8750617", t:"PASAJEROS"},
+        {d:"11/09/2017", m:"Renault", mod:"Symbol 1.6 Sedan 4P", cil:"1.6", tr:"Mecánica", k:"VIALLE", c:"RNGLPGM8850817", t:"PASAJEROS"},
+        {d:"13/10/2017", m:"Toyota", mod:"Yaris 1.5 Sedan 4P", cil:"1.5", tr:"Mecánica", k:"VIALLE", c:"TYGLPGM8910917", t:"PASAJEROS"},
+        {d:"13/10/2017", m:"Toyota", mod:"Yaris 1.5 Sedan 4P", cil:"1.5", tr:"Automática", k:"VIALLE", c:"TYGLPGM8910917", t:"PASAJEROS"},
+        {d:"13/10/2017", m:"Toyota", mod:"Yaris 1.5 Hatchback 4P", cil:"1.5", tr:"Mecánica", k:"VIALLE", c:"TYGLPGM8910917", t:"HATCHBACK"},
+        {d:"03/11/2017", m:"Hyundai", mod:"Accent 1.4 Sedan 4P", cil:"1.4", tr:"Mecánica", k:"VIALLE", c:"HYGLPGM8941017", t:"PASAJEROS"},
+        {d:"03/11/2017", m:"Hyundai", mod:"Accent 1.4 Sedan 4P", cil:"1.4", tr:"Automática", k:"VIALLE", c:"HYGLPGM8941017", t:"PASAJEROS"},
+        {d:"03/11/2017", m:"Hyundai", mod:"Accent RB 1.4 Hatchback 5P", cil:"1.4", tr:"Mecánica", k:"VIALLE", c:"HYGLPGM8941017", t:"HATCHBACK"},
+        {d:"03/11/2017", m:"Hyundai", mod:"Accent RB 1.4 Hatchback 5P", cil:"1.4", tr:"Automática", k:"VIALLE", c:"HYGLPGM8941017", t:"HATCHBACK"},
+        {d:"01/02/2018", m:"Toyota", mod:"Corolla 1.8 Sedan", cil:"1.8", tr:"Automática", k:"VIALLE", c:"TYGLPGM9140118", t:"PASAJEROS"},
+        {d:"01/02/2018", m:"Toyota", mod:"Corolla 1.8 Sedan", cil:"1.8", tr:"Mecánica", k:"VIALLE", c:"TYGLPGM9140118", t:"PASAJEROS"},
+        {d:"26/02/2018", m:"Kia", mod:"Rio 1.4 Sedan", cil:"1.4", tr:"Mecánica", k:"VIALLE", c:"KIGLPGM9190218", t:"PASAJEROS"},
+        {d:"26/02/2018", m:"Kia", mod:"Rio 1.4 Sedan", cil:"1.4", tr:"Automática", k:"VIALLE", c:"KIGLPGM9190218", t:"PASAJEROS"},
+        {d:"26/02/2018", m:"Kia", mod:"Rio 3 1.4 Hatchback", cil:"1.4", tr:"Automática", k:"VIALLE", c:"KIGLPGM9190218", t:"HATCHBACK"},
+        {d:"26/02/2018", m:"Kia", mod:"Rio 3 1.4 Hatchback", cil:"1.4", tr:"Mecánica", k:"VIALLE", c:"KIGLPGM9190218", t:"HATCHBACK"},
+        {d:"26/02/2018", m:"Kia", mod:"Rio 5 1.4 Hatchback 5P", cil:"1.4", tr:"Automática", k:"VIALLE", c:"KIGLPGM9190218", t:"HATCHBACK"},
+        {d:"26/02/2018", m:"Kia", mod:"Rio 5 1.4 Hatchback 5P", cil:"1.4", tr:"Mecánica", k:"VIALLE", c:"KIGLPGM9190218", t:"HATCHBACK"},
+        {d:"14/03/2018", m:"Chery", mod:"Arrizo 3 1.5 Sedan", cil:"1.5", tr:"Mecánica", k:"VIALLE", c:"CYGLPGM9280218", t:"PASAJEROS"},
+        {d:"14/03/2018", m:"Great Wall", mod:"Volex C30 1.5 Sedan", cil:"1.5", tr:"Mecánica", k:"VIALLE", c:"GWGLPGM9210218", t:"PASAJEROS"},
+        {d:"06/06/2018", m:"Kia", mod:"Cerato 1.6 Sedan 4P", cil:"1.6", tr:"Mecánica", k:"VIALLE", c:"KIGLPGM9380518", t:"PASAJEROS"},
+        {d:"06/06/2018", m:"Kia", mod:"Cerato 1.6 Sedan 4P", cil:"1.6", tr:"Automática", k:"VIALLE", c:"KIGLPGM9380518", t:"PASAJEROS"},
+        {d:"26/06/2018", m:"Chevrolet", mod:"Sonic 1.6 Sedan", cil:"1.6", tr:"Mecánica", k:"VIALLE", c:"CHGLPGM9400618", t:"PASAJEROS"},
+        {d:"26/07/2018", m:"Volkswagen", mod:"Virtus 1.6 Sedan", cil:"1.6", tr:"Mecánica", k:"VIALLE", c:"VWGLPGM9410618", t:"PASAJEROS"},
+        {d:"26/07/2018", m:"Volkswagen", mod:"Virtus 1.6 Sedan", cil:"1.6", tr:"Automática", k:"VIALLE", c:"VWGLPGM9410618", t:"PASAJEROS"},
+        {d:"20/08/2018", m:"Chevrolet", mod:"Sail 1.5 Sedan", cil:"1.5", tr:"Mecánica", k:"VIALLE", c:"CHGLPGM9480718", t:"PASAJEROS"},
+        {d:"17/08/2018", m:"Chevrolet", mod:"Prisma 1.4 Sedan", cil:"1.4", tr:"Automática", k:"VIALLE", c:"CHGLPGM9470718", t:"PASAJEROS"},
+        {d:"17/08/2018", m:"Chevrolet", mod:"Prisma 1.4 Sedan", cil:"1.4", tr:"Mecánica", k:"VIALLE", c:"CHGLPGM9470718", t:"PASAJEROS"},
+        {d:"23/10/2018", m:"MG", mod:"GT Sedán 1.5", cil:"1.5", tr:"Mecánica", k:"VIALLE", c:"MGGLPGM9520818", t:"PASAJEROS"},
+        {d:"23/10/2018", m:"MG", mod:"GT Sedán 1.5", cil:"1.5", tr:"Automática", k:"VIALLE", c:"MGGLPGM9520818", t:"PASAJEROS"},
+        {d:"14/11/2018", m:"Nissan", mod:"Sentra 1.8 Sedán", cil:"1.8", tr:"Mecánica", k:"VIALLE", c:"NSGLPGM8271018", t:"PASAJEROS"},
+        {d:"14/11/2018", m:"Nissan", mod:"Sentra 1.8 Sedán", cil:"1.8", tr:"Automática", k:"VIALLE", c:"NSGLPGM8271018", t:"PASAJEROS"},
+        {d:"05/02/2019", m:"DFM", mod:"A30 1.6", cil:"1.6", tr:"Mecánica", k:"VIALLE", c:"DFGLPGM9681118", t:"PASAJEROS"},
+        {d:"09/04/2019", m:"DFM", mod:"S50 1.5", cil:"1.5", tr:"Mecánica", k:"VIALLE", c:"DFGLPGM9860319", t:"PASAJEROS"},
+        {d:"04/07/2019", m:"Peugeot", mod:"301 1.6", cil:"1.6", tr:"Mecánica", k:"VIALLE", c:"PGGLPGM9970619", t:"PASAJEROS"},
+        {d:"16/09/2019", m:"Peugeot", mod:"301 1.6", cil:"1.6", tr:"Automática", k:"VIALLE", c:"PGGLPGM9970619", t:"PASAJEROS"},
+        {d:"08/03/2021", m:"Kia", mod:"Soluto 1.4 Sedan", cil:"1.4", tr:"Mecánica", k:"VIALLE", c:"KIGLPGM11100221", t:"PASAJEROS"},
+        {d:"08/03/2021", m:"Kia", mod:"Soluto 1.4 Sedan", cil:"1.4", tr:"Automática", k:"VIALLE", c:"KIGLPGM11100221", t:"PASAJEROS"},
+        {d:"31/03/2021", m:"Hyundai", mod:"Verna 1.4 Sedan 4P", cil:"1.4", tr:"Mecánica", k:"VIALLE", c:"HYGLPGM11180321", t:"PASAJEROS"},
+        {d:"31/03/2021", m:"Hyundai", mod:"Verna 1.4 Sedan 4P", cil:"1.4", tr:"Automática", k:"VIALLE", c:"HYGLPGM11180321", t:"PASAJEROS"},
+        {d:"17/01/2022", m:"Toyota", mod:"Corolla 1.6", cil:"1.6", tr:"Mecánica", k:"VIALLE", c:"TYGLPGM12151221", t:"PASAJEROS"}
     ];
 
+    // --- VARIABLES DE ESTADO ---
     const grid = document.getElementById('grid');
     const emptyState = document.getElementById('emptyState');
+    const emptyTitle = document.getElementById('emptyTitle');
+    const emptyText = document.getElementById('emptyText');
     const search = document.getElementById('searchInput');
     const brandF = document.getElementById('brandFilter');
+    const kitBtns = document.querySelectorAll('.kit-btn');
+    
+    let currentData = [];
+    let itemsToShow = 20; 
+    let activeKit = 'LANDIRENZO'; 
 
-    // Inicialización
+    // --- INICIALIZACIÓN ---
     (function init() {
-        const brands = [...new Set(db.map(i => i.m.toUpperCase()))].sort();
-        brands.forEach(b => {
-            const op = document.createElement('option');
-            op.value = b; op.innerText = b;
-            brandF.appendChild(op);
+        // Pre-procesamos la data para búsqueda rápida
+        db.forEach(item => {
+            item.searchStr = (item.m + " " + item.mod + " " + item.c).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         });
         
-        search.addEventListener('input', filter);
-        brandF.addEventListener('change', filter);
+        // Listeners
+        search.addEventListener('input', () => { filter(); });
+        brandF.addEventListener('change', () => { filter(); });
+        
+        // Carga inicial
+        setKit('LANDIRENZO');
     })();
 
-    // Lógica para generar descripciones
-    function getTechDescription(kit) {
-        if(kit === 'PRINS') return "Equipo VSI Inyección Directa";
-        return "Equipo EVO Inyección Secuencial";
+    function setKit(kit) {
+        activeKit = kit;
+        
+        // Cambiar estilo visual
+        document.body.classList.remove('landi-mode', 'prins-mode', 'vialle-mode');
+        
+        if(kit === 'PRINS') document.body.classList.add('prins-mode');
+        else if(kit === 'VIALLE') document.body.classList.add('vialle-mode');
+        else document.body.classList.add('landi-mode');
+
+        // Actualizar botones
+        kitBtns.forEach(btn => btn.classList.remove('active'));
+        if(kit === 'LANDIRENZO') kitBtns[0].classList.add('active');
+        else if(kit === 'PRINS') kitBtns[1].classList.add('active');
+        else if(kit === 'VIALLE') kitBtns[2].classList.add('active');
+
+        // Resetear filtros
+        search.value = '';
+        brandF.value = '';
+        updateBrandFilter();
+        
+        // Mostrar pantalla vacía
+        grid.innerHTML = '';
+        emptyState.style.display = 'block';
+        emptyTitle.innerText = "Inicia tu búsqueda";
+        emptyText.innerText = `Selecciona una marca o escribe el modelo para ver el catálogo ${kit}.`;
     }
 
-    // Generador de Link WhatsApp
-    function generateWhatsappLink(item) {
-        const phone = "56962990269";
-        const message = `Hola JM Autogas, me gustaría agendar una visita para evaluar la conversión de mi vehículo: ${item.m} ${item.mod} (Cert: ${item.c}). Vi el modelo en su catálogo digital.`;
-        return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    function updateBrandFilter() {
+        const availableBrands = [...new Set(db.filter(i => i.k === activeKit).map(i => i.m.toUpperCase()))].sort();
+        
+        brandF.innerHTML = '<option value="">Todas las Marcas</option>';
+        const fragment = document.createDocumentFragment();
+        availableBrands.forEach(b => {
+            const op = document.createElement('option');
+            op.value = b; op.innerText = b;
+            fragment.appendChild(op);
+        });
+        brandF.appendChild(fragment);
     }
 
     function filter() {
         const q = search.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
         const b = brandF.value;
-        
+        itemsToShow = 20;
+
         if(q === "" && b === "") {
             grid.innerHTML = '';
             emptyState.style.display = 'block';
+            emptyTitle.innerText = "Inicia tu búsqueda";
+            emptyText.innerText = `Selecciona una marca o escribe el modelo para ver el catálogo ${activeKit}.`;
             return;
+        }
+
+        currentData = db.filter(item => {
+            const matchKit = item.k === activeKit;
+            const matchText = q === "" || item.searchStr.includes(q);
+            const matchBrand = b === "" || item.m.toUpperCase() === b;
+            return matchKit && matchText && matchBrand;
+        });
+
+        if(currentData.length === 0) {
+            emptyState.style.display = 'block';
+            emptyTitle.innerText = "Sin coincidencias";
+            emptyText.innerText = "No encontramos ese modelo en la marca seleccionada.";
+            grid.innerHTML = '';
         } else {
             emptyState.style.display = 'none';
+            render();
         }
-        
-        const res = db.filter(item => {
-            const str = (item.m + " " + item.mod + " " + item.c).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            return str.includes(q) && (b === "" || item.m.toUpperCase() === b);
-        });
-        render(res);
     }
 
-    function render(data) {
+    function render() {
         grid.innerHTML = '';
-        if(!data.length) {
-            grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:50px; color:var(--text-sec); font-size:1.1rem;">Sin resultados 🔍</div>`;
-            return;
-        }
+        const slice = currentData.slice(0, itemsToShow);
+        const fragment = document.createDocumentFragment();
 
-        data.forEach((item, idx) => {
+        slice.forEach((item, idx) => {
             const el = document.createElement('div');
             el.className = 'card';
-            el.style.animationDelay = `${idx * 0.05}s`;
+            if(idx < 20) el.style.animationDelay = `${idx * 0.05}s`;
+            else el.style.animation = 'none';
             
-            // Descripción corta
-            const desc = `Vehículo tipo <strong>${item.t.toLowerCase()}</strong>, motor <strong>${item.cil}L</strong>, caja <strong>${item.tr.toLowerCase()}</strong>.`;
-            const tech = getTechDescription(item.k);
+            const desc = `Motor <strong>${item.cil}L</strong>, caja <strong>${item.tr.toLowerCase()}</strong>.`;
+            
+            let tech = "Inyección Secuencial";
+            if(item.k === 'PRINS') tech = "Inyección Directa / Alta Gama";
+            if(item.k === 'VIALLE') tech = "Sistema de Inyección Líquida";
+
             const waLink = generateWhatsappLink(item);
 
             el.innerHTML = `
@@ -599,27 +582,40 @@
                 </div>
                 <div class="card-body">
                     <div class="description-box">${desc}</div>
-                    
-                    <div class="tech-box">
-                        <span>🚀</span> ${tech}
-                    </div>
-
+                    <div class="tech-box"><span>⚙️</span> ${tech}</div>
                     <div class="specs">
                         <div class="pill">📅 ${item.d}</div>
                         <div class="pill">🏷️ ${item.k}</div>
+                        <div class="pill">🚘 ${item.t}</div>
                     </div>
-
-                    <a href="${waLink}" target="_blank" class="btn-whatsapp">
-                        📅 Agendar Visita
-                    </a>
+                    <a href="${waLink}" target="_blank" class="btn-whatsapp">📅 Agendar Visita</a>
                 </div>
                 <div class="footer-info">
                     <span style="font-family:monospace; font-weight:bold;">${item.c}</span>
                     <button class="copy-btn" onclick="copy('${item.c}', this)">COPIAR</button>
                 </div>
             `;
-            grid.appendChild(el);
+            fragment.appendChild(el);
         });
+
+        grid.appendChild(fragment);
+
+        if(currentData.length > itemsToShow) {
+            const btnMore = document.createElement('button');
+            btnMore.innerText = "⬇️ Ver más resultados";
+            btnMore.style.cssText = "grid-column: 1/-1; padding: 15px; background: var(--pill-bg); color: var(--text-main); border: 1px solid var(--card-border); border-radius: 10px; cursor: pointer; margin-top: 20px; font-weight:bold;";
+            btnMore.onclick = () => {
+                itemsToShow += 20;
+                render();
+            };
+            grid.appendChild(btnMore);
+        }
+    }
+
+    function generateWhatsappLink(item) {
+        const phone = "56962990269";
+        const message = `Hola JM Autogas, me gustaría cotizar para: ${item.m} ${item.mod} (Cert: ${item.c} - Kit ${item.k}).`;
+        return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     }
 
     function copy(text, btn) {
