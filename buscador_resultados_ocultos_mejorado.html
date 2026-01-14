@@ -55,7 +55,7 @@
 
         /* MODO VIALLE (ROJO) */
         body.vialle-mode {
-            --accent: #dc2626; /* Rojo Intenso */
+            --accent: #dc2626; 
             --accent-glow: rgba(220, 38, 38, 0.6);
         }
 
@@ -81,39 +81,66 @@
         @keyframes rgbFlow { to { background-position: 200% center; } }
 
         /* --- SELECTOR DE KIT --- */
-        .kit-selector { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; position: relative; z-index: 100; padding: 0 10px; flex-wrap: wrap; }
+        .kit-selector { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; position: relative; z-index: 100; padding: 0 10px; flex-wrap: wrap; }
         
         .kit-btn {
-            background: var(--search-bg); border: 1px solid var(--card-border); color: var(--text-sec);
-            padding: 12px 15px; border-radius: 12px; cursor: pointer; font-weight: 800; font-family: 'Outfit', sans-serif;
-            display: flex; flex-direction: column; align-items: center; gap: 5px; transition: all 0.3s; font-size: 0.9rem;
-            backdrop-filter: blur(10px); flex: 1; min-width: 100px; max-width: 200px;
+            border: 1px solid rgba(255,255,255,0.3); /* Borde sutil */
+            color: #ffffff; /* Texto Blanco siempre */
+            padding: 12px 20px; 
+            border-radius: 16px; 
+            cursor: pointer; 
+            font-family: 'Outfit', sans-serif;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            gap: 5px; 
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            flex: 1; 
+            min-width: 110px; 
+            max-width: 180px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5); /* Sombra para leer texto sobre color */
         }
-        .kit-btn small { font-weight: 400; font-size: 0.7rem; opacity: 0.8; text-align: center; }
 
-        /* ESTILO LANDIRENZO (AZUL) */
-        .kit-btn.landi:hover { border-color: #0066cc; color: #0066cc; }
-        .kit-btn.landi.active {
-            background: linear-gradient(135deg, #004080 0%, #0066cc 100%);
-            border-color: #0066cc; color: white;
-            box-shadow: 0 0 25px rgba(0, 102, 204, 0.5); transform: scale(1.05);
+        .kit-logo {
+            height: 35px; width: auto; object-fit: contain; margin-bottom: 2px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); /* Sombra al logo para que resalte */
         }
 
-        /* ESTILO PRINS (AMARILLO) */
-        .kit-btn.prins:hover { border-color: #FFCC00; color: #FFCC00; }
-        .kit-btn.prins.active {
-            background: linear-gradient(135deg, #00264d 30%, #FFCC00 100%);
-            border-color: #FFCC00; color: white;
-            box-shadow: 0 0 25px rgba(255, 204, 0, 0.4); transform: scale(1.05);
-        }
-        .kit-btn.prins.active small { color: rgba(255,255,255, 0.9); text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
+        .kit-btn small { font-weight: 600; font-size: 0.7rem; opacity: 0.9; text-align: center; text-transform: uppercase; letter-spacing: 0.5px; }
 
-        /* ESTILO VIALLE (ROJO) */
-        .kit-btn.vialle:hover { border-color: #dc2626; color: #dc2626; }
-        .kit-btn.vialle.active {
-            background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%);
-            border-color: #dc2626; color: white;
-            box-shadow: 0 0 25px rgba(220, 38, 38, 0.5); transform: scale(1.05);
+        /* --- COLORES DE FONDO BOTONES --- */
+
+        /* LANDIRENZO (AZUL) */
+        .kit-btn.landi {
+            background: linear-gradient(135deg, #00264d 0%, #0066cc 100%);
+        }
+        .kit-btn.landi:hover, .kit-btn.landi.active {
+            background: linear-gradient(135deg, #004080 0%, #3399ff 100%);
+            box-shadow: 0 0 25px rgba(0, 102, 204, 0.8); 
+            transform: scale(1.05); border-color: #66b3ff;
+        }
+
+        /* PRINS (AZUL Y AMARILLO) */
+        .kit-btn.prins {
+            /* Degradado de Azul Oscuro a Dorado */
+            background: linear-gradient(135deg, #001f3f 30%, #cca300 100%);
+        }
+        .kit-btn.prins:hover, .kit-btn.prins.active {
+            background: linear-gradient(135deg, #003366 20%, #ffcc00 100%);
+            box-shadow: 0 0 25px rgba(255, 204, 0, 0.6); 
+            transform: scale(1.05); border-color: #ffe066;
+        }
+
+        /* VIALLE (ROJO) */
+        .kit-btn.vialle {
+            background: linear-gradient(135deg, #660000 0%, #cc0000 100%);
+        }
+        .kit-btn.vialle:hover, .kit-btn.vialle.active {
+            background: linear-gradient(135deg, #990000 0%, #ff3333 100%);
+            box-shadow: 0 0 25px rgba(255, 51, 51, 0.6); 
+            transform: scale(1.05); border-color: #ff6666;
         }
 
         /* SEARCH BAR */
@@ -186,15 +213,17 @@
 
 <div class="kit-selector">
     <button class="kit-btn landi active" onclick="setKit('LANDIRENZO')">
-        🔵 LANDIRENZO
+        <img src="https://ss-cnt-001c.esmsv.com/r/content/host1/5fd8685c621f8af6003145adde3cf37b//editor/Landirenzo-logo-4D03CB9AC8-seeklogo.webp" alt="Landirenzo" class="kit-logo" style="filter: brightness(0) invert(1);">
         <small>Inyección Gaseosa</small>
     </button>
+    
     <button class="kit-btn prins" onclick="setKit('PRINS')">
-        🟡 PRINS
-        <small>Inyección Directa</small>
+        <img src="https://ss-cnt-001c.esmsv.com/r/content/host1/5fd8685c621f8af6003145adde3cf37b//editor/prins-logo-3A2CF0AEC3-seeklogo.webp" alt="Prins" class="kit-logo" style="height: 28px;">
+        <small>Alta Gama</small>
     </button>
+    
     <button class="kit-btn vialle" onclick="setKit('VIALLE')">
-        🔴 VIALLE
+        <img src="https://ss-cnt-001c.esmsv.com/r/content/host1/5fd8685c621f8af6003145adde3cf37b//editor/VIALLEXD.webp" alt="Vialle" class="kit-logo" style="filter: brightness(0) invert(1);">
         <small>Inyección Líquida</small>
     </button>
 </div>
@@ -238,7 +267,7 @@
 
     function updateIcon(theme) { themeBtn.innerHTML = theme === 'dark' ? '☀️' : '🌙'; }
 
-    // --- BASE DE DATOS COMPLETA (ACTUALIZADA) ---
+    // --- BASE DE DATOS COMPLETA ---
     const db = [
         // --- LANDIRENZO ---
         {d:"13/08/2010", m:"Nissan", mod:"Tiida 1.6 DOHC Sedán 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"NSGLPBS3490710", t:"PASAJEROS"},
@@ -408,7 +437,7 @@
         {d:"11/12/2020", m:"FORD", mod:"F150 Raptor 3.5 camioneta 4P (17-20)", cil:"3.5", tr:"Automática", k:"PRINS", c:"FRGLPGM10871120", t:"ALTA GAMA"},
         {d:"11/12/2020", m:"FORD", mod:"F150 Raptor 3.5 camioneta D/Cab (17-20)", cil:"3.5", tr:"Automática", k:"PRINS", c:"FRGLPGM10871120", t:"ALTA GAMA"},
 
-        // --- VIALLE (INYECCIÓN LÍQUIDA) - CORREGIDO ---
+        // --- VIALLE (INYECCIÓN LÍQUIDA) ---
         {d:"29/06/2017", m:"Hyundai", mod:"Accent 1.6 Sedan 4P", cil:"1.6", tr:"Mecánica", k:"VIALLE", c:"HYGLPGM8760617", t:"PASAJEROS"},
         {d:"29/06/2017", m:"Hyundai", mod:"Accent 1.6 Sedan 4P", cil:"1.6", tr:"Automática", k:"VIALLE", c:"HYGLPGM8760617", t:"PASAJEROS"},
         {d:"29/06/2017", m:"Hyundai", mod:"Accent RB 1.6 Hatchback 5P", cil:"1.6", tr:"Mecánica", k:"VIALLE", c:"HYGLPGM8760617", t:"HATCHBACK"},
@@ -471,7 +500,7 @@
 
     // --- INICIALIZACIÓN ---
     (function init() {
-        // Pre-procesamos la data para búsqueda rápida
+        // Pre-procesamos la data
         db.forEach(item => {
             item.searchStr = (item.m + " " + item.mod + " " + item.c).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         });
@@ -494,7 +523,7 @@
         else if(kit === 'VIALLE') document.body.classList.add('vialle-mode');
         else document.body.classList.add('landi-mode');
 
-        // Actualizar botones
+        // Actualizar botones activos
         kitBtns.forEach(btn => btn.classList.remove('active'));
         if(kit === 'LANDIRENZO') kitBtns[0].classList.add('active');
         else if(kit === 'PRINS') kitBtns[1].classList.add('active');
