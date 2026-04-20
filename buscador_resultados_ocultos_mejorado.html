@@ -84,8 +84,8 @@
         .kit-selector { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; position: relative; z-index: 100; padding: 0 10px; flex-wrap: wrap; }
         
         .kit-btn {
-            border: 1px solid rgba(255,255,255,0.3); /* Borde sutil */
-            color: #ffffff; /* Texto Blanco siempre */
+            border: 1px solid rgba(255,255,255,0.3); 
+            color: #ffffff; 
             padding: 12px 20px; 
             border-radius: 16px; 
             cursor: pointer; 
@@ -100,48 +100,25 @@
             min-width: 110px; 
             max-width: 180px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            text-shadow: 0 1px 3px rgba(0,0,0,0.5); /* Sombra para leer texto sobre color */
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5); 
         }
 
         .kit-logo {
             height: 35px; width: auto; object-fit: contain; margin-bottom: 2px;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); /* Sombra al logo para que resalte */
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); 
         }
 
         .kit-btn small { font-weight: 600; font-size: 0.7rem; opacity: 0.9; text-align: center; text-transform: uppercase; letter-spacing: 0.5px; }
 
         /* --- COLORES DE FONDO BOTONES --- */
+        .kit-btn.landi { background: linear-gradient(135deg, #00264d 0%, #0066cc 100%); }
+        .kit-btn.landi:hover, .kit-btn.landi.active { background: linear-gradient(135deg, #004080 0%, #3399ff 100%); box-shadow: 0 0 25px rgba(0, 102, 204, 0.8); transform: scale(1.05); border-color: #66b3ff; }
 
-        /* LANDIRENZO (AZUL) */
-        .kit-btn.landi {
-            background: linear-gradient(135deg, #00264d 0%, #0066cc 100%);
-        }
-        .kit-btn.landi:hover, .kit-btn.landi.active {
-            background: linear-gradient(135deg, #004080 0%, #3399ff 100%);
-            box-shadow: 0 0 25px rgba(0, 102, 204, 0.8); 
-            transform: scale(1.05); border-color: #66b3ff;
-        }
+        .kit-btn.prins { background: linear-gradient(135deg, #001f3f 30%, #cca300 100%); }
+        .kit-btn.prins:hover, .kit-btn.prins.active { background: linear-gradient(135deg, #003366 20%, #ffcc00 100%); box-shadow: 0 0 25px rgba(255, 204, 0, 0.6); transform: scale(1.05); border-color: #ffe066; }
 
-        /* PRINS (AZUL Y AMARILLO) */
-        .kit-btn.prins {
-            /* Degradado de Azul Oscuro a Dorado */
-            background: linear-gradient(135deg, #001f3f 30%, #cca300 100%);
-        }
-        .kit-btn.prins:hover, .kit-btn.prins.active {
-            background: linear-gradient(135deg, #003366 20%, #ffcc00 100%);
-            box-shadow: 0 0 25px rgba(255, 204, 0, 0.6); 
-            transform: scale(1.05); border-color: #ffe066;
-        }
-
-        /* VIALLE (ROJO) */
-        .kit-btn.vialle {
-            background: linear-gradient(135deg, #660000 0%, #cc0000 100%);
-        }
-        .kit-btn.vialle:hover, .kit-btn.vialle.active {
-            background: linear-gradient(135deg, #990000 0%, #ff3333 100%);
-            box-shadow: 0 0 25px rgba(255, 51, 51, 0.6); 
-            transform: scale(1.05); border-color: #ff6666;
-        }
+        .kit-btn.vialle { background: linear-gradient(135deg, #660000 0%, #cc0000 100%); }
+        .kit-btn.vialle:hover, .kit-btn.vialle.active { background: linear-gradient(135deg, #990000 0%, #ff3333 100%); box-shadow: 0 0 25px rgba(255, 51, 51, 0.6); transform: scale(1.05); border-color: #ff6666; }
 
         /* SEARCH BAR */
         .search-wrapper { position: sticky; top: 15px; z-index: 100; display: flex; justify-content: center; padding: 0 20px; }
@@ -269,7 +246,7 @@
 
     // --- BASE DE DATOS COMPLETA ---
     const db = [
-        // --- LANDIRENZO ---
+        // --- LANDIRENZO (ACTUALIZADO 2025) ---
         {d:"13/08/2010", m:"Nissan", mod:"Tiida 1.6 DOHC Sedán 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"NSGLPBS3490710", t:"PASAJEROS"},
         {d:"27/09/2011", m:"Samsung", mod:"SM3 1.6 Sedán 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"RSGLPBS3850911", t:"PASAJEROS"},
         {d:"09/03/2012", m:"Hyundai", mod:"Accent RB 1.6 Sedán 4P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"HYGLPBS4370212", t:"PASAJEROS"},
@@ -381,6 +358,16 @@
         {d:"03/12/2025", m:"Hyundai", mod:"Creta GS PE 1.6 SW 5P", cil:"1.6", tr:"Automática", k:"LANDIRENZO", c:"KIGLPGM13770924", t:"OK"},
         {d:"03/12/2025", m:"Hyundai", mod:"Venue QX MT", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"KIGLPGM13770924", t:"OK"},
         {d:"04/12/2025", m:"MG", mod:"ZS 1.5 MT Station Wagon", cil:"1.5", tr:"Mecánica", k:"LANDIRENZO", c:"MGGLPGM12270322", t:"OK"},
+        
+        /* INTEGRACIONES NUEVAS 2025 */
+        {d:"10/01/2025", m:"Chevrolet", mod:"Montana 1.2T AT", cil:"1.2", tr:"Automática", k:"LANDIRENZO", c:"CHGLPGM14261224", t:"CAMIONETA"},
+        {d:"10/01/2025", m:"Chevrolet", mod:"Montana 1.2T MT", cil:"1.2", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPGM14261224", t:"CAMIONETA"},
+        {d:"13/02/2025", m:"Toyota", mod:"Corolla Cross 2.0 CVT", cil:"2.0", tr:"Automática", k:"LANDIRENZO", c:"TYGLPGM14370225", t:"SUV"},
+        {d:"13/02/2025", m:"Toyota", mod:"Corolla Cross 2.0 MT", cil:"2.0", tr:"Mecánica", k:"LANDIRENZO", c:"TYGLPGM14370225", t:"SUV"},
+        {d:"14/02/2025", m:"Nissan", mod:"Navara 2.5 MT 4x2", cil:"2.5", tr:"Mecánica", k:"LANDIRENZO", c:"NSGLPGM14380225", t:"CAMIONETA"},
+        {d:"14/02/2025", m:"Nissan", mod:"Navara 2.5 AT 4x4", cil:"2.5", tr:"Automática", k:"LANDIRENZO", c:"NSGLPGM14380225", t:"CAMIONETA"},
+
+        /* LANDIRENZO COMERCIAL */
         {d:"31/05/2013", m:"Volkswagen", mod:"Saveiro 1.6 Pick Up 2P", cil:"1.6", tr:"Mecánica", k:"LANDIRENZO", c:"VWGLPBS5270413", t:"COMERCIAL"},
         {d:"26/02/2015", m:"Chevrolet", mod:"N300 Max 1.2 Furgón 5P", cil:"1.2", tr:"Mecánica", k:"LANDIRENZO", c:"CHGLPBS6981214", t:"COMERCIAL"},
         {d:"20/07/2015", m:"Gac Gonow", mod:"Way Cargo 1.0 Furgón 5P", cil:"1.0", tr:"Mecánica", k:"LANDIRENZO", c:"GNGLPBS7220415", t:"COMERCIAL"},
@@ -437,7 +424,7 @@
         {d:"11/12/2020", m:"FORD", mod:"F150 Raptor 3.5 camioneta 4P (17-20)", cil:"3.5", tr:"Automática", k:"PRINS", c:"FRGLPGM10871120", t:"ALTA GAMA"},
         {d:"11/12/2020", m:"FORD", mod:"F150 Raptor 3.5 camioneta D/Cab (17-20)", cil:"3.5", tr:"Automática", k:"PRINS", c:"FRGLPGM10871120", t:"ALTA GAMA"},
 
-        // --- VIALLE (INYECCIÓN LÍQUIDA) ---
+        // --- VIALLE ---
         {d:"29/06/2017", m:"Hyundai", mod:"Accent 1.6 Sedan 4P", cil:"1.6", tr:"Mecánica", k:"VIALLE", c:"HYGLPGM8760617", t:"PASAJEROS"},
         {d:"29/06/2017", m:"Hyundai", mod:"Accent 1.6 Sedan 4P", cil:"1.6", tr:"Automática", k:"VIALLE", c:"HYGLPGM8760617", t:"PASAJEROS"},
         {d:"29/06/2017", m:"Hyundai", mod:"Accent RB 1.6 Hatchback 5P", cil:"1.6", tr:"Mecánica", k:"VIALLE", c:"HYGLPGM8760617", t:"HATCHBACK"},
@@ -500,41 +487,33 @@
 
     // --- INICIALIZACIÓN ---
     (function init() {
-        // Pre-procesamos la data
         db.forEach(item => {
             item.searchStr = (item.m + " " + item.mod + " " + item.c).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         });
         
-        // Listeners
         search.addEventListener('input', () => { filter(); });
         brandF.addEventListener('change', () => { filter(); });
         
-        // Carga inicial
         setKit('LANDIRENZO');
     })();
 
     function setKit(kit) {
         activeKit = kit;
-        
-        // Cambiar estilo visual
         document.body.classList.remove('landi-mode', 'prins-mode', 'vialle-mode');
         
         if(kit === 'PRINS') document.body.classList.add('prins-mode');
         else if(kit === 'VIALLE') document.body.classList.add('vialle-mode');
         else document.body.classList.add('landi-mode');
 
-        // Actualizar botones activos
         kitBtns.forEach(btn => btn.classList.remove('active'));
         if(kit === 'LANDIRENZO') kitBtns[0].classList.add('active');
         else if(kit === 'PRINS') kitBtns[1].classList.add('active');
         else if(kit === 'VIALLE') kitBtns[2].classList.add('active');
 
-        // Resetear filtros
         search.value = '';
         brandF.value = '';
         updateBrandFilter();
         
-        // Mostrar pantalla vacía
         grid.innerHTML = '';
         emptyState.style.display = 'block';
         emptyTitle.innerText = "Inicia tu búsqueda";
@@ -543,7 +522,6 @@
 
     function updateBrandFilter() {
         const availableBrands = [...new Set(db.filter(i => i.k === activeKit).map(i => i.m.toUpperCase()))].sort();
-        
         brandF.innerHTML = '<option value="">Todas las Marcas</option>';
         const fragment = document.createDocumentFragment();
         availableBrands.forEach(b => {
@@ -594,10 +572,8 @@
             const el = document.createElement('div');
             el.className = 'card';
             if(idx < 20) el.style.animationDelay = `${idx * 0.05}s`;
-            else el.style.animation = 'none';
             
             const desc = `Motor <strong>${item.cil}L</strong>, caja <strong>${item.tr.toLowerCase()}</strong>.`;
-            
             let tech = "Inyección Secuencial";
             if(item.k === 'PRINS') tech = "Inyección Directa / Alta Gama";
             if(item.k === 'VIALLE') tech = "Sistema de Inyección Líquida";
